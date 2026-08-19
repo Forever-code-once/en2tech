@@ -3,11 +3,41 @@
  * Anything that appears in more than one place lives here.
  */
 
+const FALLBACK_URL = "https://en2.tech";
+
+/**
+ * Resolve the canonical site origin.
+ *
+ * Deliberately not `process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_URL`: build
+ * platforms hand an env var that exists-but-is-blank through as `""`, which
+ * `??` happily passes along, and `new URL("")` then throws ERR_INVALID_URL
+ * during page-data collection. Anything blank or unparseable falls back
+ * instead, and says so in the build log rather than failing cryptically.
+ *
+ * Returns `.origin`, so a trailing slash or stray path in the env var can't
+ * produce doubled slashes in canonicals and the sitemap.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+  if (!raw) return FALLBACK_URL;
+
+  try {
+    return new URL(raw).origin;
+  } catch {
+    console.warn(
+      `[site] NEXT_PUBLIC_SITE_URL is set but not a valid URL (${JSON.stringify(raw)}). ` +
+        `Falling back to ${FALLBACK_URL}.`,
+    );
+    return FALLBACK_URL;
+  }
+}
+
 export const site = {
   name: "EN2 Tech",
   legalName: "EN2 Tech LLC",
   domain: "en2.tech",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://en2.tech",
+  url: resolveSiteUrl(),
   tagline: "Building the future of small business.",
   description:
     "Custom software development, systems integration and fractional CTO services for small businesses in rural Middle Tennessee.",
