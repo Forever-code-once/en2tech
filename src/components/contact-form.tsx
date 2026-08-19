@@ -117,8 +117,8 @@ export function ContactForm() {
     touched[name] && errors[name as keyof ContactFieldErrors];
 
   const inputClass = (name: string) =>
-    `w-full border-2 bg-paper-50 px-4 py-3 text-ink placeholder:text-ink-faint transition-colors focus:outline-none focus-visible:border-clay-600 ${
-      showError(name) ? "border-clay-600" : "border-paper-400 hover:border-forest-800"
+    `w-full rounded-xl border bg-void/60 px-4 py-3 text-bright placeholder:text-faint transition-colors focus:outline-none focus-visible:border-volt-400 ${
+      showError(name) ? "border-alert" : "border-line hover:border-line-hi"
     }`;
 
   if (status === "success") {
@@ -127,27 +127,27 @@ export function ContactForm() {
         ref={statusRef}
         tabIndex={-1}
         role="status"
-        className="plate focus:outline-none"
+        className="panel panel-lit rounded-2xl overflow-hidden focus:outline-none"
       >
-        <p className="plate-head label">Message sent</p>
+        <p className="label border-b border-line px-6 py-4 text-faint">Message sent</p>
         <div className="px-6 py-10 text-center">
           <p
             aria-hidden="true"
-            className="mx-auto grid h-12 w-12 place-items-center bg-forest-800 font-slab text-xl text-paper-200"
+            className="mx-auto grid h-12 w-12 place-items-center bg-raised font-display text-xl text-bright"
           >
             ✓
           </p>
-          <h3 className="mt-5 font-slab text-2xl font-bold text-forest-800">
+          <h3 className="mt-5 font-display text-2xl font-bold text-bright">
             Thanks — it&apos;s on its way
           </h3>
-          <p className="mx-auto mt-3 max-w-sm text-ink-soft">{statusMessage}</p>
+          <p className="mx-auto mt-3 max-w-sm text-muted">{statusMessage}</p>
           <button
             type="button"
             onClick={() => {
               setStatus("idle");
               setStatusMessage("");
             }}
-            className="label mt-8 border-2 border-forest-800 px-5 py-3 text-forest-800 transition-colors hover:bg-forest-800 hover:text-paper-200"
+            className="label mt-8 border border-line px-5 py-3 text-bright transition-colors hover:bg-raised hover:text-bright"
           >
             Send another →
           </button>
@@ -168,15 +168,15 @@ export function ContactForm() {
         <div key={field.name}>
           <label
             htmlFor={fieldId(field.name)}
-            className="label mb-2.5 flex items-baseline gap-2 text-forest-800"
+            className="label mb-2.5 flex items-baseline gap-2 text-bright"
           >
             {field.label}
             {field.required ? (
-              <span aria-hidden="true" className="text-clay-600">
+              <span aria-hidden="true" className="text-volt-400">
                 *
               </span>
             ) : (
-              <span className="font-normal tracking-normal text-ink-faint">
+              <span className="font-normal tracking-normal text-faint">
                 (optional)
               </span>
             )}
@@ -202,7 +202,7 @@ export function ContactForm() {
             className={inputClass(field.name)}
           />
           {showError(field.name) ? (
-            <p id={errorId(field.name)} className="label mt-2.5 text-clay-600">
+            <p id={errorId(field.name)} className="label mt-2.5 text-volt-400">
               {errors[field.name as keyof ContactFieldErrors]}
             </p>
           ) : null}
@@ -212,10 +212,10 @@ export function ContactForm() {
       <div>
         <label
           htmlFor={fieldId("message")}
-          className="label mb-2.5 flex items-baseline gap-2 text-forest-800"
+          className="label mb-2.5 flex items-baseline gap-2 text-bright"
         >
           Message
-          <span aria-hidden="true" className="text-clay-600">
+          <span aria-hidden="true" className="text-volt-400">
             *
           </span>
         </label>
@@ -238,7 +238,7 @@ export function ContactForm() {
           className={`${inputClass("message")} resize-y`}
         />
         {showError("message") ? (
-          <p id={errorId("message")} className="label mt-2.5 text-clay-600">
+          <p id={errorId("message")} className="label mt-2.5 text-volt-400">
             {errors.message}
           </p>
         ) : null}
@@ -267,7 +267,7 @@ export function ContactForm() {
         className="focus:outline-none"
       >
         {statusMessage && status === "error" ? (
-          <p className="label border-2 border-clay-600 bg-clay-100 px-4 py-3.5 leading-relaxed text-clay-700">
+          <p className="label border border-volt-500 bg-raised px-4 py-3.5 leading-relaxed text-volt-300">
             {statusMessage}
           </p>
         ) : null}
@@ -282,11 +282,11 @@ export function ContactForm() {
         {status === "submitting" ? "Sending…" : "Send message →"}
       </Button>
 
-      <p className="text-sm leading-relaxed text-ink-faint">
+      <p className="text-sm leading-relaxed text-faint">
         We&apos;ll only use your details to reply. No lists, no sharing — see the{" "}
         <a
           href="/privacy"
-          className="text-ink-soft underline decoration-paper-400 underline-offset-2 hover:text-clay-600"
+          className="text-muted underline decoration-paper-400 underline-offset-2 hover:text-volt-400"
         >
           privacy note
         </a>

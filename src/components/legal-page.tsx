@@ -34,21 +34,21 @@ export function LegalPage({
 
       <Container size="narrow">
         <div className="py-14 sm:py-18">
-          <ol className="plate">
+          <ol className="panel panel-lit rounded-2xl overflow-hidden">
             {sections.map((section, i) => (
               <li
                 key={section.heading}
                 className={
-                  i < sections.length - 1 ? "border-b-2 border-forest-800" : ""
+                  i < sections.length - 1 ? "border-b border-line" : ""
                 }
               >
-                <h2 className="label flex items-baseline gap-3 border-b border-paper-300 bg-paper-200 px-6 py-3.5 text-forest-800">
-                  <span aria-hidden="true" className="text-clay-600 tabular-nums">
+                <h2 className="label flex items-baseline gap-3 border-b border-line bg-raised px-6 py-3.5 text-bright">
+                  <span aria-hidden="true" className="text-volt-400 tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {section.heading}
                 </h2>
-                <div className="measure space-y-4 px-6 py-6 text-ink-soft">
+                <div className="measure space-y-4 px-6 py-6 text-muted">
                   {section.body}
                 </div>
               </li>

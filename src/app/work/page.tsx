@@ -35,7 +35,7 @@ export default function WorkPage() {
         {publishedCaseStudies.length > 0 ? (
           <>
             <Reveal>
-              <p className="label mb-8 text-ink-faint">
+              <p className="label mb-8 text-faint">
                 {publishedCaseStudies.length} record
                 {publishedCaseStudies.length === 1 ? "" : "s"} found
               </p>
@@ -50,12 +50,12 @@ export default function WorkPage() {
           </>
         ) : (
           <Reveal>
-            <div className="plate px-8 py-20 text-center">
-              <p className="label text-ink-faint">0 records found</p>
-              <h2 className="mt-5 font-slab text-2xl font-bold text-forest-800">
+            <div className="panel panel-lit rounded-2xl overflow-hidden px-8 py-20 text-center">
+              <p className="label text-faint">0 records found</p>
+              <h2 className="mt-5 font-display text-2xl font-bold text-bright">
                 Case studies coming soon
               </h2>
-              <p className="mx-auto mt-3 max-w-md text-ink-soft">
+              <p className="mx-auto mt-3 max-w-md text-muted">
                 We are writing up current engagements. In the meantime, ask us
                 directly about work relevant to your industry.
               </p>

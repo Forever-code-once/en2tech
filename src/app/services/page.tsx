@@ -38,7 +38,7 @@ export default function ServicesPage() {
           id={service.slug}
           size="wide"
           className={
-            i % 2 === 1 ? "border-y-2 border-forest-800 bg-paper-100" : ""
+            i % 2 === 1 ? "border-y border-line bg-surface" : ""
           }
         >
           <SectionRule name={`Service ${i + 1} of ${services.length}`} />
@@ -52,13 +52,13 @@ export default function ServicesPage() {
               </Reveal>
 
               <Reveal delay={70}>
-                <p className="measure mt-5 font-slab text-xl leading-snug font-600 text-clay-600">
+                <p className="measure mt-5 font-display text-xl leading-snug font-600 text-volt-400">
                   {service.tagline}
                 </p>
               </Reveal>
 
               <Reveal delay={130}>
-                <p className="measure mt-6 text-ink-soft">{service.body}</p>
+                <p className="measure mt-6 text-muted">{service.body}</p>
               </Reveal>
 
               <Reveal delay={190}>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
                   {service.stack.map((item) => (
                     <li
                       key={item}
-                      className="label border border-paper-400 px-2.5 py-1.5 text-ink-faint"
+                      className="label border border-line px-2.5 py-1.5 text-faint"
                     >
                       {item}
                     </li>
@@ -77,23 +77,23 @@ export default function ServicesPage() {
 
             <div className="space-y-6">
               <Reveal delay={110}>
-                <div className="plate">
-                  <h3 className="plate-head label">What you get</h3>
+                <div className="panel panel-lit rounded-2xl overflow-hidden">
+                  <h3 className="label border-b border-line px-6 py-4 text-faint">What you get</h3>
                   <ul>
                     {service.deliverables.map((item, j) => (
                       <li
                         key={item}
                         className={`flex gap-4 px-5 py-4 sm:px-6 ${
                           j < service.deliverables.length - 1
-                            ? "border-b border-paper-300"
+                            ? "border-b border-line"
                             : ""
                         }`}
                       >
                         <span
                           aria-hidden="true"
-                          className="mt-2 h-1.5 w-1.5 shrink-0 bg-clay-600"
+                          className="mt-2 h-1.5 w-1.5 shrink-0 bg-volt-400"
                         />
-                        <span className="text-[0.97rem] text-ink-soft">
+                        <span className="text-[0.97rem] text-muted">
                           {item}
                         </span>
                       </li>
@@ -103,8 +103,8 @@ export default function ServicesPage() {
               </Reveal>
 
               <Reveal delay={170}>
-                <div className="border-2 border-paper-400">
-                  <h3 className="label border-b-2 border-paper-400 bg-paper-100 px-5 py-3 text-ink-faint sm:px-6">
+                <div className="border border-line">
+                  <h3 className="label border-b border-line bg-surface px-5 py-3 text-faint sm:px-6">
                     This is for you if
                   </h3>
                   <ul>
@@ -113,17 +113,17 @@ export default function ServicesPage() {
                         key={item}
                         className={`flex gap-4 px-5 py-4 sm:px-6 ${
                           j < service.fitFor.length - 1
-                            ? "border-b border-paper-300"
+                            ? "border-b border-line"
                             : ""
                         }`}
                       >
                         <span
                           aria-hidden="true"
-                          className="shrink-0 font-slab text-lg leading-tight font-bold text-clay-600"
+                          className="shrink-0 font-display text-lg leading-tight font-bold text-volt-400"
                         >
                           →
                         </span>
-                        <span className="text-[0.97rem] text-ink-soft">
+                        <span className="text-[0.97rem] text-muted">
                           {item}
                         </span>
                       </li>
@@ -136,7 +136,7 @@ export default function ServicesPage() {
         </Section>
       ))}
 
-      <Section size="wide" className="border-t-2 border-forest-800">
+      <Section size="wide" className="border-t border-line">
         <SectionRule name="How we work" />
         <div className="mt-7">
           <SectionHeading

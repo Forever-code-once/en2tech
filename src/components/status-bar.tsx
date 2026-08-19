@@ -1,37 +1,35 @@
 import { site } from "@/lib/site";
 
 /**
- * Docket strip above the header — availability, location, and the year the
- * practice opened. Reads as the header block of a service record.
+ * Thin availability strip above the header.
  */
 export function StatusBar() {
   return (
-    <div className="fixed inset-x-0 top-0 z-60 bg-forest-800 text-paper-200">
-      <div className="mx-auto flex h-7 w-full max-w-[100rem] items-center justify-between gap-4 px-4 sm:px-6">
-        <p className="label flex items-center gap-2.5">
-          <span
-            aria-hidden="true"
-            className={`inline-block h-2 w-2 ${
-              site.atCapacity ? "bg-clay-500" : "bg-paper-200"
-            }`}
-          />
-          <span>{site.atCapacity ? "Booked full" : "Taking new work"}</span>
-          <span aria-hidden="true" className="text-forest-500">
-            &bull;
+    <div className="fixed inset-x-0 top-0 z-60 border-b border-line bg-void/80 backdrop-blur-md">
+      <div className="mx-auto flex h-7 w-full max-w-[92rem] items-center justify-between gap-4 px-4 sm:px-8">
+        <p className="label flex items-center gap-2.5 text-faint">
+          <span className="relative flex h-1.5 w-1.5">
+            <span
+              aria-hidden="true"
+              className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-70 ${
+                site.atCapacity ? "bg-flag" : "bg-volt-400"
+              }`}
+            />
+            <span
+              aria-hidden="true"
+              className={`relative inline-flex h-1.5 w-1.5 rounded-full ${
+                site.atCapacity ? "bg-flag" : "bg-volt-400"
+              }`}
+            />
           </span>
-          <span className="hidden text-paper-400 sm:inline">
-            Accepting enquiries
+          <span className={site.atCapacity ? "text-flag" : "text-volt-400"}>
+            {site.atCapacity ? "Booked full" : "Taking new work"}
           </span>
+          <span className="hidden sm:inline">— still worth a conversation</span>
         </p>
 
-        <p className="label flex items-center gap-2.5 text-paper-400">
-          <span className="hidden sm:inline">
-            {site.locality}, {site.region}
-          </span>
-          <span aria-hidden="true" className="hidden text-forest-500 sm:inline">
-            &bull;
-          </span>
-          <span>Est. {site.founded}</span>
+        <p className="label hidden text-faint sm:block">
+          {site.locality}, {site.region} · Est. {site.founded}
         </p>
       </div>
     </div>

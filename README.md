@@ -5,10 +5,10 @@ technology consulting in Murfreesboro, Tennessee.
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · MDX
 
-**Design language: field manual.** Bone paper, deep forest, oxblood. The
-reference is equipment documentation and service records rather than a
-brochure. The rules are documented in `src/app/globals.css` — read them before
-adding a component.
+**Design language: midnight.** True black ground, bright saturated
+photography, one electric-cyan accent, with a slow animated aurora field
+behind everything. The rules are documented in `src/app/globals.css` — read
+them before adding a component.
 
 ---
 
@@ -102,21 +102,27 @@ the sitemap, and search indexing.
 ## Notes on the build
 
 **The design system has rules.** Four, enforced by convention in
-`src/app/globals.css`: borders are 2px and forest — they are structure, not
-trim; a `.plate` always carries a `.plate-head` bar naming what it holds; one
-accent (oxblood) for emphasis, never decoration; and no rounded corners
-anywhere, since every radius token is `0px`. The `.label` utility — uppercase,
-`0.13em` tracking — is the workhorse for every plate header, data caption and
-eyebrow.
+`src/app/globals.css`: the ground is black and surfaces lift with *light*
+(`.panel` + `.panel-lit`), never with heavy grey borders; photography stays
+bright and saturated via `.photo-bright` and is never muted into the
+background; one accent (electric cyan) on UI, with violet appearing only
+inside the animated field; and radii stay soft. `.label` is the uppercase
+eyebrow/caption utility, `.measure` holds body copy near 64 characters.
 
-**Two typefaces.** Zilla Slab carries every heading — a workhorse slab with
-enough weight to anchor a plate header, and none of the boutique-editorial
-softness a high-contrast serif would bring. Public Sans handles all running
-text and spec labels. Use `.measure` to hold body copy near 66 characters.
+**Two typefaces.** Sora carries the display voice — a geometric grotesk that
+holds up at very large sizes on black without the optical bloat a softer face
+shows. Manrope handles running text; its open apertures stay legible as
+light-on-dark, where tighter faces close up.
+
+**The background is a canvas, not CSS.** `AnimatedField` composites four large
+radial gradients on Lissajous paths with `globalCompositeOperation = "lighter"`,
+so overlaps brighten into cyan-white like real light rather than muddying. It
+caps DPR at 1.5, throttles to 30fps, and stops entirely when the tab is hidden.
+Under `prefers-reduced-motion` it paints a single static frame and never starts
+the loop — the composition survives, the movement does not.
 
 **Numbering means something.** The process steps and the era log are numbered
-because they genuinely run in order. Nothing else is, deliberately — numbering
-here is information, not ornament.
+because they genuinely run in order. Nothing else is.
 
 **Fonts are self-hosted.** `next/font` fetches both at build time. There is no
 request to Google at runtime — the page makes zero external requests.
@@ -130,10 +136,15 @@ and free for one instance. If the site ever runs behind a load balancer, swap
 the Map in `src/lib/rate-limit.ts` for Redis — the `rateLimit()` signature is
 designed not to change.
 
-**Motion is opt-out aware.** `Reveal` does a short rise and fade — paper
-settling. It renders content visible on the server and never applies the hidden
-state when `prefers-reduced-motion` is set, so content cannot be stranded at
-`opacity: 0`.
+**Motion is opt-out aware.** `Reveal` does a rise and fade. It renders content
+visible on the server and never applies the hidden state when
+`prefers-reduced-motion` is set, so content cannot be stranded at `opacity: 0`.
+
+**Images are static imports.** Files in `src/images/` are imported directly, so
+Next derives intrinsic dimensions and generates the blur placeholder at build
+time — no CLS and no hand-maintained width/height pairs. `sharp` is a
+dependency because production image optimization requires it in the standalone
+Docker build.
 
 **Security headers ship with the app**, not the proxy — see the CSP in
 `next.config.ts`. Caddy only strips its own `Server` banner.
@@ -145,6 +156,9 @@ state when `prefers-reduced-motion` is set, so content cannot be stranded at
 - [ ] **Verify every figure in `src/content/work.ts`** — the case studies are
       anonymized scaffolds built from claims the old site already made publicly.
       No client names or quotes were invented, but the metrics need confirming.
+- [ ] **Decide on the photography** — see [IMAGE-CREDITS.md](./IMAGE-CREDITS.md).
+      The current images are licensed stock of people who don't work here, which
+      cuts against the "we're real and local" pitch.
 - [ ] Add `public/images/og-image.jpg` (1200×630) and favicons
 - [ ] Confirm `site.email` in `src/lib/site.ts` is the right inbox
 - [ ] Set the real postal code / coordinates in `site.ts` if the LocalBusiness

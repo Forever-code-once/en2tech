@@ -2,27 +2,25 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
 /**
- * Square, 2px-bordered, uppercase. Solid forest is the primary action; hover
- * empties the fill so the border carries it — the same swap the plates use.
+ * Pill buttons. The primary lights up on hover rather than darkening — on a
+ * black ground, emphasis reads as more light, not less.
  */
 const base =
-  "label inline-flex items-center justify-center gap-2.5 border-2 transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-45";
+  "inline-flex items-center justify-center gap-2 rounded-full font-600 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-45";
 
 const variants = {
   primary:
-    "border-forest-800 bg-forest-800 text-paper-200 hover:bg-transparent hover:text-forest-800",
+    "bg-volt-400 text-void hover:bg-volt-300 hover:shadow-[0_0_36px_-8px_rgb(34_224_255/0.7)]",
   secondary:
-    "border-forest-800 bg-transparent text-forest-800 hover:bg-forest-800 hover:text-paper-200",
-  accent:
-    "border-clay-600 bg-clay-600 text-paper-100 hover:bg-transparent hover:text-clay-600",
+    "border border-line-hi bg-raised/70 text-bright backdrop-blur-sm hover:border-volt-500 hover:bg-lifted",
   ghost:
-    "border-paper-400 bg-transparent text-ink-soft hover:border-forest-800 hover:text-forest-800",
+    "border border-line text-muted hover:border-volt-500 hover:text-volt-300",
 } as const;
 
 const sizes = {
-  sm: "px-4 py-2.5",
-  md: "px-6 py-3.5",
-  lg: "px-8 py-4",
+  sm: "px-4 py-2 text-sm",
+  md: "px-6 py-3 text-[0.95rem]",
+  lg: "px-7 py-3.5 text-base",
 } as const;
 
 type Shared = {

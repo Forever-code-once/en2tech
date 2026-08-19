@@ -64,7 +64,7 @@ export default async function CaseStudyPage({ params }: Params) {
               <li key={serviceSlug}>
                 <Link
                   href={`/services#${serviceSlug}`}
-                  className="label inline-block border-2 border-paper-400 px-3.5 py-2 text-ink-soft transition-colors hover:border-forest-800 hover:text-forest-800"
+                  className="label inline-block rounded-full border border-line px-3.5 py-2 text-muted transition-colors hover:border-volt-500 hover:text-volt-300"
                 >
                   {service.title}
                 </Link>
@@ -75,7 +75,7 @@ export default async function CaseStudyPage({ params }: Params) {
       </PageHero>
 
       <Section size="wide" className="pb-0">
-        <MetricsBand metrics={study.metrics} title="Measured results" />
+        <MetricsBand metrics={study.metrics} />
       </Section>
 
       <Section size="wide">
@@ -84,32 +84,32 @@ export default async function CaseStudyPage({ params }: Params) {
             <SectionRule name="The situation" />
 
             <Reveal delay={70}>
-              <p className="measure mt-6 text-ink-soft">{study.challenge}</p>
+              <p className="measure mt-6 text-muted">{study.challenge}</p>
             </Reveal>
 
             <Reveal delay={140}>
-              <dl className="plate mt-9">
-                <div className="flex gap-5 border-b border-paper-300 px-5 py-4">
-                  <dt className="label w-20 shrink-0 pt-1 text-ink-faint">
+              <dl className="panel panel-lit rounded-2xl overflow-hidden mt-9">
+                <div className="flex gap-5 border-b border-line px-5 py-4">
+                  <dt className="label w-20 shrink-0 pt-1 text-faint">
                     Client
                   </dt>
-                  <dd className="text-ink">{study.client}</dd>
+                  <dd className="text-bright">{study.client}</dd>
                 </div>
-                <div className="flex gap-5 border-b border-paper-300 px-5 py-4">
-                  <dt className="label w-20 shrink-0 pt-1 text-ink-faint">
+                <div className="flex gap-5 border-b border-line px-5 py-4">
+                  <dt className="label w-20 shrink-0 pt-1 text-faint">
                     Sector
                   </dt>
-                  <dd className="text-ink">{study.industry}</dd>
+                  <dd className="text-bright">{study.industry}</dd>
                 </div>
                 <div className="flex gap-5 px-5 py-4">
-                  <dt className="label w-20 shrink-0 pt-1.5 text-ink-faint">
+                  <dt className="label w-20 shrink-0 pt-1.5 text-faint">
                     Stack
                   </dt>
                   <dd className="flex flex-wrap gap-1.5">
                     {study.stack.map((item) => (
                       <span
                         key={item}
-                        className="label border border-paper-400 px-2 py-1.5 text-ink-soft"
+                        className="label border border-line px-2 py-1.5 text-muted"
                       >
                         {item}
                       </span>
@@ -125,7 +125,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
             {/* Ordered because the steps ran in this sequence and each
                 depended on the one before it. */}
-            <ol className="plate mt-6">
+            <ol className="panel panel-lit rounded-2xl overflow-hidden mt-6">
               {study.approach.map((step, i) => (
                 <Reveal
                   key={step}
@@ -133,29 +133,29 @@ export default async function CaseStudyPage({ params }: Params) {
                   delay={i * 70}
                   className={
                     i < study.approach.length - 1
-                      ? "border-b border-paper-300"
+                      ? "border-b border-line"
                       : ""
                   }
                 >
                   <div className="flex gap-5 px-5 py-5 sm:px-6">
                     <span
                       aria-hidden="true"
-                      className="label shrink-0 pt-1 text-clay-600 tabular-nums"
+                      className="label shrink-0 pt-1 text-volt-400 tabular-nums"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-[0.97rem] text-ink-soft">{step}</p>
+                    <p className="text-[0.97rem] text-muted">{step}</p>
                   </div>
                 </Reveal>
               ))}
             </ol>
 
             <Reveal delay={120}>
-              <div className="mt-6 border-2 border-clay-600">
-                <h3 className="label bg-clay-600 px-5 py-3 text-paper-100 sm:px-6">
+              <div className="mt-6 overflow-hidden rounded-2xl border border-volt-500/50">
+                <h3 className="label bg-volt-400 px-5 py-3 text-void sm:px-6">
                   Where it landed
                 </h3>
-                <p className="px-5 py-6 text-lg leading-relaxed text-ink sm:px-6">
+                <p className="px-5 py-6 text-lg leading-relaxed text-bright sm:px-6">
                   {study.outcome}
                 </p>
               </div>
@@ -165,33 +165,33 @@ export default async function CaseStudyPage({ params }: Params) {
       </Section>
 
       {related.length > 0 ? (
-        <Section size="wide" className="border-t-2 border-forest-800 bg-paper-100">
+        <Section size="wide" className="border-t border-line bg-surface">
           <SectionRule name="More records" />
-          <ul className="plate mt-8">
+          <ul className="panel panel-lit rounded-2xl overflow-hidden mt-8">
             {related.map((item, i) => (
               <Reveal
                 key={item.slug}
                 as="li"
                 delay={i * 80}
                 className={
-                  i < related.length - 1 ? "border-b-2 border-forest-800" : ""
+                  i < related.length - 1 ? "border-b border-line" : ""
                 }
               >
                 <Link
                   href={`/work/${item.slug}`}
-                  className="group flex flex-wrap items-center justify-between gap-4 px-6 py-6 transition-colors hover:bg-paper-50"
+                  className="group flex flex-wrap items-center justify-between gap-4 px-6 py-6 transition-colors hover:bg-raised/60"
                 >
                   <span className="min-w-0">
-                    <span className="label block text-ink-faint">
+                    <span className="label block text-faint">
                       {item.industry} · {item.year}
                     </span>
-                    <span className="mt-2 block font-slab text-xl font-bold text-forest-800 transition-colors group-hover:text-clay-600">
+                    <span className="mt-2 block font-display text-xl font-bold text-bright transition-colors group-hover:text-volt-400">
                       {item.title}
                     </span>
                   </span>
                   <span
                     aria-hidden="true"
-                    className="label text-ink-faint transition-all group-hover:translate-x-1 group-hover:text-clay-600"
+                    className="label text-faint transition-all group-hover:translate-x-1 group-hover:text-volt-400"
                   >
                     →
                   </span>

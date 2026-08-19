@@ -53,8 +53,8 @@ export default function AboutPage() {
       <Section size="wide">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <Reveal>
-            <div className="measure space-y-4 text-ink-soft">
-              <p className="font-slab text-2xl leading-snug font-600 text-forest-800">
+            <div className="measure space-y-4 text-muted">
+              <p className="font-display text-2xl leading-snug font-600 text-bright">
                 There&apos;s a gap in small-town America between the businesses
                 that grew up on paper, phone calls, and handshake deals — and the
                 digital tools that could transform them.
@@ -65,7 +65,7 @@ export default function AboutPage() {
                 stood on a dispatch floor at 5 a.m., or they know the industry
                 cold and outsource anything technical.
               </p>
-              <p className="font-slab text-lg leading-snug font-600 text-forest-800">
+              <p className="font-display text-lg leading-snug font-600 text-bright">
                 We&apos;ve lived through every era of it.
               </p>
               <p>
@@ -87,28 +87,28 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <figure className="plate lg:sticky lg:top-36">
-              <p className="plate-head label">From the founder</p>
-              <blockquote className="ledger px-6 py-8">
-                <p className="font-slab text-xl leading-relaxed text-forest-800">
+            <figure className="panel panel-lit rounded-2xl overflow-hidden lg:sticky lg:top-36">
+              <p className="label border-b border-line px-6 py-4 text-faint">From the founder</p>
+              <blockquote className="px-6 py-8">
+                <p className="font-display text-xl leading-relaxed text-bright">
                   &ldquo;I&apos;ve watched technology go from something you
                   dialed into, to something that runs every business on earth.
                   The companies that win in small-town America are the ones with
                   someone who&apos;s been on both sides of that line.&rdquo;
                 </p>
               </blockquote>
-              <figcaption className="flex items-center gap-4 border-t-2 border-forest-800 px-6 py-5">
+              <figcaption className="flex items-center gap-4 border-t border-line px-6 py-5">
                 <span
                   aria-hidden="true"
-                  className="grid h-11 w-11 shrink-0 place-items-center bg-forest-800 font-slab text-sm font-bold text-paper-200"
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-volt-500/40 font-display text-sm font-600 text-volt-400"
                 >
                   JG
                 </span>
                 <span className="min-w-0">
-                  <span className="block truncate font-slab text-base font-bold text-forest-800">
+                  <span className="block truncate font-display text-base font-bold text-bright">
                     {site.founder}
                   </span>
-                  <span className="label mt-1 block text-ink-faint">
+                  <span className="label mt-1 block text-faint">
                     Founder, {site.name}
                   </span>
                 </span>
@@ -119,7 +119,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ── Era log ── */}
-      <Section size="wide" className="border-y-2 border-forest-800 bg-paper-100">
+      <Section size="wide" className="border-y border-line bg-surface">
         <SectionRule name="The long version" />
 
         <div className="mt-7">
@@ -130,26 +130,26 @@ export default function AboutPage() {
         </div>
 
         {/* Chronological, so the dated ordering carries real information. */}
-        <ol className="plate mt-12 grid md:grid-cols-2">
+        <ol className="panel panel-lit rounded-2xl overflow-hidden mt-12 grid md:grid-cols-2">
           {timeline.map((era, i) => (
             <Reveal
               key={era.title}
               as="li"
               delay={i * 80}
-              className={`border-forest-800 ${
-                i % 2 === 0 ? "md:border-r-2" : ""
-              } ${i < timeline.length - 2 ? "border-b-2" : "max-md:border-b-2"} ${
+              className={`border-line ${
+                i % 2 === 0 ? "md:border-r" : ""
+              } ${i < timeline.length - 2 ? "border-b" : "max-md:border-b"} ${
                 i === timeline.length - 1 ? "max-md:border-b-0" : ""
               }`}
             >
               <div className="h-full p-6 sm:p-8">
-                <p className="label inline-block bg-clay-600 px-2.5 py-1.5 text-paper-100 tabular-nums">
+                <p className="label inline-block rounded-full bg-volt-400 px-3 py-1.5 text-void tabular-nums">
                   {era.period}
                 </p>
-                <h3 className="mt-4 font-slab text-xl leading-tight font-bold text-forest-800">
+                <h3 className="mt-4 font-display text-xl leading-tight font-bold text-bright">
                   {era.title}
                 </h3>
-                <p className="mt-3 text-ink-soft">{era.body}</p>
+                <p className="mt-3 text-muted">{era.body}</p>
               </div>
             </Reveal>
           ))}
@@ -164,23 +164,23 @@ export default function AboutPage() {
           <SectionHeading title="Four things we don't compromise on." />
         </div>
 
-        <ul className="plate mt-12 grid md:grid-cols-2">
+        <ul className="panel panel-lit rounded-2xl overflow-hidden mt-12 grid md:grid-cols-2">
           {principles.map((principle, i) => (
             <Reveal
               key={principle.title}
               as="li"
               delay={i * 80}
-              className={`border-forest-800 ${
-                i % 2 === 0 ? "md:border-r-2" : ""
-              } ${i < principles.length - 2 ? "border-b-2" : "max-md:border-b-2"} ${
+              className={`border-line ${
+                i % 2 === 0 ? "md:border-r" : ""
+              } ${i < principles.length - 2 ? "border-b" : "max-md:border-b"} ${
                 i === principles.length - 1 ? "max-md:border-b-0" : ""
               }`}
             >
               <div className="h-full p-6 sm:p-8">
-                <h3 className="font-slab text-xl leading-tight font-bold text-forest-800">
+                <h3 className="font-display text-xl leading-tight font-bold text-bright">
                   {principle.title}
                 </h3>
-                <p className="mt-3 text-ink-soft">{principle.body}</p>
+                <p className="mt-3 text-muted">{principle.body}</p>
               </div>
             </Reveal>
           ))}

@@ -15,32 +15,20 @@ const steps = [
   },
 ];
 
-/**
- * Numbered because the steps genuinely run in order — each depends on the one
- * before it. The numbering is information, not ornament.
- */
+/** Numbered because the steps genuinely run in sequence. */
 export function ProcessSteps() {
   return (
-    <ol className="plate grid md:grid-cols-3">
+    <ol className="grid gap-5 md:grid-cols-3">
       {steps.map((step, i) => (
-        <Reveal
-          key={step.title}
-          as="li"
-          delay={i * 90}
-          className={
-            i < steps.length - 1
-              ? "border-b-2 border-forest-800 md:border-b-0 md:border-r-2"
-              : ""
-          }
-        >
-          <div className="h-full p-7 sm:p-8">
-            <span className="label inline-block bg-clay-600 px-2.5 py-1.5 text-paper-100 tabular-nums">
-              Step {i + 1} of {steps.length}
+        <Reveal key={step.title} as="li" delay={i * 90}>
+          <div className="panel panel-lit h-full rounded-2xl p-7 sm:p-8">
+            <span className="label inline-flex h-9 w-9 items-center justify-center rounded-full border border-volt-500/40 text-volt-400 tabular-nums">
+              {i + 1}
             </span>
-            <h3 className="mt-5 font-slab text-xl leading-tight font-bold text-forest-800">
+            <h3 className="mt-6 font-display text-xl leading-tight font-600 text-bright">
               {step.title}
             </h3>
-            <p className="mt-3 text-ink-soft">{step.body}</p>
+            <p className="mt-3 text-muted">{step.body}</p>
           </div>
         </Reveal>
       ))}

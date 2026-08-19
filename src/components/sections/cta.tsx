@@ -1,6 +1,8 @@
 import { ButtonLink } from "../ui/button";
 import { Container } from "../ui/container";
 import { Reveal } from "../ui/reveal";
+import { Photo } from "../photo";
+import clientConversation from "@/images/client-conversation.jpg";
 import { site } from "@/lib/site";
 
 export function CtaSection({
@@ -11,47 +13,53 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="border-t-2 border-forest-800 bg-forest-800 py-20 sm:py-24">
+    <section className="relative z-1 border-t border-line py-20 sm:py-28">
       <Container size="wide">
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_auto] lg:items-end">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <div>
             <Reveal>
-              <div className="flex items-center gap-3.5">
-                <span aria-hidden="true" className="h-0.5 w-8 bg-clay-500" />
-                <span className="label text-clay-500">Get in touch</span>
+              <div className="flex items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-volt-400"
+                />
+                <span className="label text-volt-400">Get in touch</span>
               </div>
             </Reveal>
 
             <Reveal delay={70}>
-              <h2 className="mt-6 max-w-3xl text-[clamp(1.875rem,4vw,3rem)] text-paper-100">
-                {title}
-              </h2>
+              <h2 className="mt-6 text-[clamp(2rem,4.5vw,3.5rem)]">{title}</h2>
             </Reveal>
 
             <Reveal delay={130}>
-              <p className="measure mt-5 text-lg leading-relaxed text-paper-400">
+              <p className="measure mt-6 text-lg leading-relaxed text-muted">
                 {body}
               </p>
             </Reveal>
+
+            <Reveal delay={190}>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/contact" size="lg">
+                  Start a conversation
+                </ButtonLink>
+                <ButtonLink
+                  href={`mailto:${site.email}`}
+                  variant="ghost"
+                  size="lg"
+                >
+                  {site.email}
+                </ButtonLink>
+              </div>
+            </Reveal>
           </div>
 
-          <Reveal delay={190}>
-            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <ButtonLink
-                href="/contact"
-                size="lg"
-                className="border-paper-200 bg-paper-200 text-forest-800 hover:bg-transparent hover:text-paper-200"
-              >
-                Start a conversation
-              </ButtonLink>
-              <ButtonLink
-                href={`mailto:${site.email}`}
-                size="lg"
-                className="border-forest-500 bg-transparent text-paper-200 hover:border-paper-200 hover:bg-transparent hover:text-paper-100"
-              >
-                {site.email}
-              </ButtonLink>
-            </div>
+          <Reveal delay={140}>
+            <Photo
+              src={clientConversation}
+              alt="Four colleagues around a café table, one holding a tablet, mid-conversation about a project"
+              aspect="aspect-[4/3]"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
           </Reveal>
         </div>
       </Container>

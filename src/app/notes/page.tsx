@@ -33,40 +33,40 @@ export default function NotesPage() {
 
       <Section size="default">
         {notes.length > 0 ? (
-          <ul className="border-t-2 border-forest-800">
+          <ul className="border-t border-line">
             {notes.map((note, i) => (
               <Reveal
                 key={note.slug}
                 as="li"
                 delay={i * 70}
-                className="border-b-2 border-forest-800"
+                className="border-b border-line"
               >
                 <article>
                   <Link
                     href={`/notes/${note.slug}`}
-                    className="group flex flex-col gap-4 px-5 py-8 transition-colors hover:bg-paper-100 sm:flex-row sm:gap-8"
+                    className="group flex flex-col gap-4 px-5 py-8 transition-colors hover:bg-surface sm:flex-row sm:gap-8"
                   >
-                    <div className="label flex shrink-0 gap-3 text-ink-faint sm:w-36 sm:flex-col sm:gap-2">
+                    <div className="label flex shrink-0 gap-3 text-faint sm:w-36 sm:flex-col sm:gap-2">
                       <time dateTime={note.published} className="tabular-nums">
                         {formatDate(note.published)}
                       </time>
-                      <span aria-hidden="true" className="text-paper-400 sm:hidden">
+                      <span aria-hidden="true" className="text-line-hi sm:hidden">
                         &bull;
                       </span>
                       <span>{note.readingTime} min</span>
                     </div>
 
                     <div className="min-w-0">
-                      <h2 className="font-slab text-2xl leading-snug font-bold text-forest-800 transition-colors group-hover:text-clay-600">
+                      <h2 className="font-display text-2xl leading-snug font-bold text-bright transition-colors group-hover:text-volt-400">
                         {note.title}
                         {note.draft ? (
-                          <span className="label ml-3 inline-block border-2 border-flag px-2 py-1 align-middle text-flag">
+                          <span className="label ml-3 inline-block border border-flag px-2 py-1 align-middle text-flag">
                             Draft
                           </span>
                         ) : null}
                       </h2>
                       {note.description ? (
-                        <p className="measure mt-2.5 text-ink-soft">
+                        <p className="measure mt-2.5 text-muted">
                           {note.description}
                         </p>
                       ) : null}
@@ -75,7 +75,7 @@ export default function NotesPage() {
                           {note.tags.map((tag) => (
                             <li
                               key={tag}
-                              className="label border border-paper-400 px-2.5 py-1.5 text-ink-faint"
+                              className="label border border-line px-2.5 py-1.5 text-faint"
                             >
                               {tag}
                             </li>
@@ -90,12 +90,12 @@ export default function NotesPage() {
           </ul>
         ) : (
           <Reveal>
-            <div className="plate px-8 py-20 text-center">
-              <p className="label text-ink-faint">0 entries</p>
-              <h2 className="mt-5 font-slab text-2xl font-bold text-forest-800">
+            <div className="panel panel-lit rounded-2xl overflow-hidden px-8 py-20 text-center">
+              <p className="label text-faint">0 entries</p>
+              <h2 className="mt-5 font-display text-2xl font-bold text-bright">
                 Nothing published yet
               </h2>
-              <p className="mx-auto mt-3 max-w-md text-ink-soft">
+              <p className="mx-auto mt-3 max-w-md text-muted">
                 Notes will appear here as they&apos;re written.
               </p>
             </div>

@@ -53,31 +53,31 @@ export default function ContactPage() {
             {/* ── Aside: details and expectations ── */}
             <div className="lg:sticky lg:top-36 lg:self-start">
               <Reveal>
-                <dl className="plate">
-                  <div className="border-b border-paper-300 px-6 py-5">
-                    <dt className="label text-ink-faint">Email</dt>
+                <dl className="panel panel-lit rounded-2xl overflow-hidden">
+                  <div className="border-b border-line px-6 py-5">
+                    <dt className="label text-faint">Email</dt>
                     <dd className="mt-2.5">
                       <a
                         href={`mailto:${site.email}`}
-                        className="font-slab text-xl font-bold text-clay-600 underline decoration-2 underline-offset-4 transition-colors hover:text-clay-700"
+                        className="font-display text-xl font-bold text-volt-400 underline decoration-2 underline-offset-4 transition-colors hover:text-volt-300"
                       >
                         {site.email}
                       </a>
                     </dd>
                   </div>
-                  <div className="border-b border-paper-300 px-6 py-5">
-                    <dt className="label text-ink-faint">Based in</dt>
-                    <dd className="mt-2.5 text-ink">
+                  <div className="border-b border-line px-6 py-5">
+                    <dt className="label text-faint">Based in</dt>
+                    <dd className="mt-2.5 text-bright">
                       {site.locality}, {site.regionName}
                     </dd>
                   </div>
                   <div className="px-6 py-5">
-                    <dt className="label text-ink-faint">Serving</dt>
+                    <dt className="label text-faint">Serving</dt>
                     <dd className="mt-3 flex flex-wrap gap-1.5">
                       {site.areaServed.map((area) => (
                         <span
                           key={area}
-                          className="label border border-paper-400 px-2.5 py-1.5 text-ink-soft"
+                          className="label border border-line px-2.5 py-1.5 text-muted"
                         >
                           {area}
                         </span>
@@ -88,22 +88,22 @@ export default function ContactPage() {
               </Reveal>
 
               <Reveal delay={100}>
-                <div className="plate mt-6">
-                  <h2 className="plate-head label">What to expect</h2>
+                <div className="panel panel-lit rounded-2xl overflow-hidden mt-6">
+                  <h2 className="label border-b border-line px-6 py-4 text-faint">What to expect</h2>
                   <ul>
                     {expectations.map((item, i) => (
                       <li
                         key={item.title}
                         className={`px-6 py-5 ${
                           i < expectations.length - 1
-                            ? "border-b border-paper-300"
+                            ? "border-b border-line"
                             : ""
                         }`}
                       >
-                        <h3 className="font-slab text-lg font-bold text-forest-800">
+                        <h3 className="font-display text-lg font-bold text-bright">
                           {item.title}
                         </h3>
-                        <p className="mt-1.5 text-sm text-ink-soft">
+                        <p className="mt-1.5 text-sm text-muted">
                           {item.body}
                         </p>
                       </li>
@@ -115,8 +115,8 @@ export default function ContactPage() {
 
             {/* ── The form ── */}
             <Reveal delay={80}>
-              <div className="plate">
-                <h2 className="plate-head label">Send us a message</h2>
+              <div className="panel panel-lit rounded-2xl overflow-hidden">
+                <h2 className="label border-b border-line px-6 py-4 text-faint">Send us a message</h2>
                 <div className="p-6 sm:p-8">
                   <ContactForm />
                 </div>

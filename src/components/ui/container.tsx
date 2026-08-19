@@ -1,13 +1,9 @@
 import type { ReactNode } from "react";
 
-/**
- * Widths align with the header/footer rails so page content sits on the same
- * measure as the chrome above and below it.
- */
 const widths = {
   narrow: "max-w-3xl",
-  default: "max-w-5xl",
-  wide: "max-w-[100rem]",
+  default: "max-w-6xl",
+  wide: "max-w-[92rem]",
 } as const;
 
 export function Container({
@@ -20,7 +16,7 @@ export function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto w-full ${widths[size]} px-4 sm:px-6 ${className}`.trim()}>
+    <div className={`mx-auto w-full ${widths[size]} px-4 sm:px-8 ${className}`.trim()}>
       {children}
     </div>
   );

@@ -1,34 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Public_Sans, Zilla_Slab } from "next/font/google";
+import { Manrope, Sora } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StatusBar } from "@/components/status-bar";
+import { AnimatedField } from "@/components/animated-field";
 import { JsonLd } from "@/components/json-ld";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
 /**
- * Zilla Slab carries every heading — a workhorse slab with enough weight to
- * anchor a plate header, and none of the boutique-editorial softness a
- * high-contrast serif would bring. Public Sans handles all running text and
- * spec labels.
+ * Sora carries the display voice — a geometric grotesk that holds up at very
+ * large sizes on black without the optical bloat a softer face would show.
+ * Manrope handles running text; its slightly open apertures stay legible as
+ * light-on-dark, where tighter faces close up.
  *
  * Both are self-hosted by next/font at build time — no runtime request to
  * Google, and no layout shift.
  */
-const zilla = Zilla_Slab({
+const sora = Sora({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-zilla",
+  variable: "--font-sora",
 });
 
-const publicSans = Public_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
-  variable: "--font-public-sans",
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -75,22 +76,24 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#14291f",
-  colorScheme: "light",
+  themeColor: "#000000",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${zilla.variable} ${publicSans.variable}`}>
+    <html lang="en" className={`${sora.variable} ${manrope.variable}`}>
       <body className="min-h-dvh antialiased">
         <a
           href="#main"
-          className="label sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:bg-forest-800 focus:px-4 focus:py-3 focus:text-paper-100"
+          className="label sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:bg-volt-400 focus:px-4 focus:py-3 focus:text-void"
         >
           Skip to content
         </a>
+
+        <AnimatedField />
 
         <StatusBar />
         <SiteHeader />

@@ -1,67 +1,60 @@
 @import "tailwindcss";
 
 /* ============================================================
-   EN2 TECH — FIELD MANUAL DESIGN SYSTEM
+   EN2 TECH — MIDNIGHT
 
-   Bone paper, deep forest, oxblood. The reference is equipment
-   documentation and service records rather than a brochure:
-   information sits inside bordered plates with titled header
-   bars, rules are structural, and the slab display face does
-   the talking.
+   True black ground, bright saturated photography, one electric
+   accent. The page is dark so the imagery carries the colour;
+   UI chrome stays near-monochrome and lets the photos shout.
 
    Rules this system holds:
-     · Borders are 2px and forest — they are structure, not trim.
-     · A plate always has a header bar naming what it holds.
-     · One accent (oxblood), used for emphasis, never decoration.
-     · Data is tabular and right-legible. No floating cards.
+     · Ground is black. Surfaces lift with light, never with grey
+       borders alone.
+     · Photography runs bright and full-bleed — never muted or
+       duotoned into the background.
+     · One accent (electric cyan). Violet appears only inside the
+       animated field, never on UI.
+     · Soft radii. This is the warm, modern register.
    ============================================================ */
 
 @theme {
-  /* — Paper: the bone ground and its rules — */
-  --color-paper-50: #f6f3ec;
-  --color-paper-100: #efebe1;
-  --color-paper-200: #eae5da;
-  --color-paper-300: #ded7c8;
-  --color-paper-400: #cbc2ae;
+  /* — Ground and surfaces — */
+  --color-void: #000000;
+  --color-abyss: #06080b;
+  --color-surface: #0b0e14;
+  --color-raised: #12161f;
+  --color-lifted: #1a1f2b;
 
-  /* — Forest: ink, structure, and every border — */
-  --color-forest-900: #0d1c15;
-  --color-forest-800: #14291f;
-  --color-forest-700: #1d3a2c;
-  --color-forest-600: #2b4d3b;
-  --color-forest-500: #40664f;
-
-  /* — Oxblood: the single accent — */
-  --color-clay-700: #7e3419;
-  --color-clay-600: #9c4522;
-  --color-clay-500: #b4552f;
-  --color-clay-100: #e6d3c6;
+  /* — Hairlines — */
+  --color-line: #1e2431;
+  --color-line-hi: #2c3444;
 
   /* — Text — */
-  --color-ink: #1a221d;
-  --color-ink-soft: #47524b;
-  --color-ink-faint: #6e7a72;
+  --color-bright: #f2f6fb;
+  --color-muted: #a3aebf;
+  --color-faint: #616d7e;
+
+  /* — Electric accent — */
+  --color-volt-300: #7ef0ff;
+  --color-volt-400: #22e0ff;
+  --color-volt-500: #06c4e8;
+  --color-volt-600: #0499b8;
+
+  /* — Field colours: used ONLY by the animated background — */
+  --color-field-a: #22e0ff;
+  --color-field-b: #7c3aed;
+  --color-field-c: #0ea5e9;
 
   /* — Status — */
-  --color-flag: #8a6d1f;
+  --color-alert: #ff5f6d;
+  --color-flag: #ffc94d;
 
   /* — Type — */
-  --font-slab: var(--font-zilla), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
   /* — Motion — */
-  --ease-paper: cubic-bezier(0.22, 0.61, 0.36, 1);
-
-  /* Plates and rules are square. A stray rounded corner reads as
-     a different design system, so every radius token is zeroed. */
-  --radius-xs: 0px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
-  --radius-2xl: 0px;
-  --radius-3xl: 0px;
-  --radius-4xl: 0px;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ============================================================
@@ -70,8 +63,7 @@
 
 @layer base {
   * {
-    border-color: var(--color-forest-800);
-    border-radius: 0;
+    border-color: var(--color-line);
   }
 
   html {
@@ -81,22 +73,21 @@
   }
 
   body {
-    background-color: var(--color-paper-200);
-    color: var(--color-ink);
+    background-color: var(--color-void);
+    color: var(--color-bright);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.62;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-slab);
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    line-height: 1.06;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
     text-wrap: balance;
-    color: var(--color-forest-800);
   }
 
   p {
@@ -104,84 +95,111 @@
   }
 
   ::selection {
-    background-color: var(--color-clay-600);
-    color: var(--color-paper-100);
+    background-color: var(--color-volt-400);
+    color: var(--color-void);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-clay-600);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-volt-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  * {
+    scrollbar-color: var(--color-line-hi) var(--color-void);
+    scrollbar-width: thin;
   }
 }
 
 /* ============================================================
-   FIELD MANUAL UTILITIES
+   UTILITIES
    ============================================================ */
 
 @layer utilities {
-  /* — Uppercase spec label. Used for every plate header, data
-       caption and eyebrow in the system. — */
+  /* — Small uppercase label — */
   .label {
     font-family: var(--font-sans);
     font-size: 0.6875rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.16em;
     line-height: 1.2;
   }
 
-  /* — Plate: a bordered region holding one kind of information.
-       Always paired with .plate-head so the reader is told what
-       they are looking at. — */
-  .plate {
-    border: 2px solid var(--color-forest-800);
-    background-color: var(--color-paper-100);
+  /* — Glass panel. Surfaces lift off black with a translucent
+       fill and a light top edge, not a heavy border. — */
+  .panel {
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.05) 0%,
+      rgb(255 255 255 / 0.02) 100%
+    );
+    border: 1px solid var(--color-line);
+    backdrop-filter: blur(12px);
   }
 
-  .plate-head {
-    background-color: var(--color-forest-800);
-    color: var(--color-paper-200);
-    padding: 0.6875rem 1.125rem;
+  /* Catches the light along the top edge — the detail that makes
+     a panel read as raised rather than as a flat box. */
+  .panel-lit {
+    position: relative;
   }
 
-  /* — Rule: a structural divider at plate weight — */
-  .rule-2 {
-    height: 2px;
-    background-color: var(--color-forest-800);
+  .panel-lit::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.18) 50%,
+      transparent
+    );
+    pointer-events: none;
   }
 
-  /* — Ledger paper: faint horizontal ruling, like a service log — */
-  .ledger {
-    background-image: repeating-linear-gradient(
+  /* — Accent glow behind a bright element — */
+  .volt-glow {
+    box-shadow:
+      0 0 0 1px rgb(34 224 255 / 0.28),
+      0 0 32px -8px rgb(34 224 255 / 0.5);
+  }
+
+  .text-volt-glow {
+    color: var(--color-volt-400);
+    text-shadow: 0 0 28px rgb(34 224 255 / 0.45);
+  }
+
+  /* — Photography treatment. Images stay bright and saturated;
+       only the very bottom is graded into black so text can sit
+       over it without a flat scrim across the whole frame. — */
+  .photo-bright {
+    filter: saturate(1.12) contrast(1.06) brightness(1.04);
+  }
+
+  .photo-fade-bottom {
+    mask-image: linear-gradient(
       to bottom,
-      transparent 0 2.25rem,
-      var(--color-paper-300) 2.25rem calc(2.25rem + 1px)
+      black 0%,
+      black 62%,
+      rgb(0 0 0 / 0.55) 88%,
+      transparent 100%
     );
   }
 
-  /* — Stamp: a bordered status mark, set slightly off-axis so it
-       reads as applied rather than typeset. — */
-  .stamp {
-    display: inline-block;
-    border: 2px solid currentColor;
-    padding: 0.375rem 0.75rem;
-    transform: rotate(-1.5deg);
-  }
-
-  /* — Long-form measure. Body copy stays near 66 characters. — */
+  /* — Measure for running text — */
   .measure {
-    max-width: 66ch;
+    max-width: 64ch;
   }
 
-  /* — Reveal: a short rise and fade. Paper settling, not a
-       terminal wipe — the previous direction's animation would
-       read as borrowed here. — */
+  /* — Reveal: rise and fade — */
   .reveal {
     opacity: 0;
-    transform: translateY(0.75rem);
+    transform: translateY(1.5rem);
     transition:
-      opacity 0.5s var(--ease-paper),
-      transform 0.5s var(--ease-paper);
+      opacity 0.75s var(--ease-soft),
+      transform 0.75s var(--ease-soft);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
