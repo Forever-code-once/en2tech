@@ -48,15 +48,15 @@ export default async function CaseStudyPage({ params }: Params) {
   return (
     <>
       <PageHero
-        eyebrow={`open ${study.slug}`}
+        eyebrow={`${study.industry} · ${study.year}`}
         title={study.title}
         lede={study.summary}
         breadcrumb={[
-          { name: "work", href: "/work" },
-          { name: study.slug, href: `/work/${study.slug}` },
+          { name: "Work", href: "/work" },
+          { name: study.client, href: `/work/${study.slug}` },
         ]}
       >
-        <ul className="flex flex-wrap gap-1.5">
+        <ul className="flex flex-wrap gap-2">
           {study.serviceSlugs.map((serviceSlug) => {
             const service = getService(serviceSlug);
             if (!service) return null;
@@ -64,7 +64,7 @@ export default async function CaseStudyPage({ params }: Params) {
               <li key={serviceSlug}>
                 <Link
                   href={`/services#${serviceSlug}`}
-                  className="label inline-block border border-grid px-3 py-2 text-fg-dim transition-colors hover:border-phos hover:text-phos"
+                  className="label inline-block border-2 border-paper-400 px-3.5 py-2 text-ink-soft transition-colors hover:border-forest-800 hover:text-forest-800"
                 >
                   {service.title}
                 </Link>
@@ -74,44 +74,42 @@ export default async function CaseStudyPage({ params }: Params) {
         </ul>
       </PageHero>
 
-      <Section size="wide" className="py-0">
-        <div className="border-x border-b border-grid">
-          <MetricsBand metrics={study.metrics} />
-        </div>
+      <Section size="wide" className="pb-0">
+        <MetricsBand metrics={study.metrics} title="Measured results" />
       </Section>
 
       <Section size="wide">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
           <div className="lg:sticky lg:top-36 lg:self-start">
-            <SectionRule index={1} name="Situation" />
+            <SectionRule name="The situation" />
 
             <Reveal delay={70}>
-              <p className="prose-body mt-8 text-fg-dim">{study.challenge}</p>
+              <p className="measure mt-6 text-ink-soft">{study.challenge}</p>
             </Reveal>
 
             <Reveal delay={140}>
-              <dl className="mt-10 border border-grid">
-                <div className="flex gap-4 border-b border-grid px-5 py-4">
-                  <dt className="label w-20 shrink-0 pt-0.5 text-fg-faint">
+              <dl className="plate mt-9">
+                <div className="flex gap-5 border-b border-paper-300 px-5 py-4">
+                  <dt className="label w-20 shrink-0 pt-1 text-ink-faint">
                     Client
                   </dt>
-                  <dd className="font-mono text-sm text-fg">{study.client}</dd>
+                  <dd className="text-ink">{study.client}</dd>
                 </div>
-                <div className="flex gap-4 border-b border-grid px-5 py-4">
-                  <dt className="label w-20 shrink-0 pt-0.5 text-fg-faint">
+                <div className="flex gap-5 border-b border-paper-300 px-5 py-4">
+                  <dt className="label w-20 shrink-0 pt-1 text-ink-faint">
                     Sector
                   </dt>
-                  <dd className="font-mono text-sm text-fg">{study.industry}</dd>
+                  <dd className="text-ink">{study.industry}</dd>
                 </div>
-                <div className="flex gap-4 px-5 py-4">
-                  <dt className="label w-20 shrink-0 pt-1 text-fg-faint">
+                <div className="flex gap-5 px-5 py-4">
+                  <dt className="label w-20 shrink-0 pt-1.5 text-ink-faint">
                     Stack
                   </dt>
                   <dd className="flex flex-wrap gap-1.5">
                     {study.stack.map((item) => (
                       <span
                         key={item}
-                        className="label border border-grid px-2 py-1.5 text-fg-dim"
+                        className="label border border-paper-400 px-2 py-1.5 text-ink-soft"
                       >
                         {item}
                       </span>
@@ -123,37 +121,43 @@ export default async function CaseStudyPage({ params }: Params) {
           </div>
 
           <div>
-            <SectionRule index={2} name="Execution" />
+            <SectionRule name="What we did" />
 
-            <ol className="mt-8 border border-grid">
+            {/* Ordered because the steps ran in this sequence and each
+                depended on the one before it. */}
+            <ol className="plate mt-6">
               {study.approach.map((step, i) => (
                 <Reveal
                   key={step}
                   as="li"
                   delay={i * 70}
                   className={
-                    i < study.approach.length - 1 ? "border-b border-grid" : ""
+                    i < study.approach.length - 1
+                      ? "border-b border-paper-300"
+                      : ""
                   }
                 >
-                  <div className="flex gap-5 px-6 py-5">
+                  <div className="flex gap-5 px-5 py-5 sm:px-6">
                     <span
                       aria-hidden="true"
-                      className="label shrink-0 pt-1 text-phos tabular-nums"
+                      className="label shrink-0 pt-1 text-clay-600 tabular-nums"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="prose-body text-sm text-fg-dim">{step}</p>
+                    <p className="text-[0.97rem] text-ink-soft">{step}</p>
                   </div>
                 </Reveal>
               ))}
             </ol>
 
             <Reveal delay={120}>
-              <div className="mt-6 border border-phos-dim bg-shell">
-                <h3 className="label border-b border-phos-dim px-6 py-3.5 text-phos">
-                  <span aria-hidden="true">## </span>Outcome
+              <div className="mt-6 border-2 border-clay-600">
+                <h3 className="label bg-clay-600 px-5 py-3 text-paper-100 sm:px-6">
+                  Where it landed
                 </h3>
-                <p className="prose-body px-6 py-6 text-fg">{study.outcome}</p>
+                <p className="px-5 py-6 text-lg leading-relaxed text-ink sm:px-6">
+                  {study.outcome}
+                </p>
               </div>
             </Reveal>
           </div>
@@ -161,31 +165,33 @@ export default async function CaseStudyPage({ params }: Params) {
       </Section>
 
       {related.length > 0 ? (
-        <Section size="wide" className="border-t border-grid">
-          <SectionRule index={3} name="More records" />
-          <ul className="mt-10 border border-grid">
+        <Section size="wide" className="border-t-2 border-forest-800 bg-paper-100">
+          <SectionRule name="More records" />
+          <ul className="plate mt-8">
             {related.map((item, i) => (
               <Reveal
                 key={item.slug}
                 as="li"
                 delay={i * 80}
-                className={i < related.length - 1 ? "border-b border-grid" : ""}
+                className={
+                  i < related.length - 1 ? "border-b-2 border-forest-800" : ""
+                }
               >
                 <Link
                   href={`/work/${item.slug}`}
-                  className="group flex flex-wrap items-center justify-between gap-4 px-6 py-6 transition-colors hover:bg-panel"
+                  className="group flex flex-wrap items-center justify-between gap-4 px-6 py-6 transition-colors hover:bg-paper-50"
                 >
                   <span className="min-w-0">
-                    <span className="label block text-fg-faint">
-                      {item.industry}
+                    <span className="label block text-ink-faint">
+                      {item.industry} · {item.year}
                     </span>
-                    <span className="mt-2 block font-mono text-lg uppercase text-fg transition-colors group-hover:text-phos">
+                    <span className="mt-2 block font-slab text-xl font-bold text-forest-800 transition-colors group-hover:text-clay-600">
                       {item.title}
                     </span>
                   </span>
                   <span
                     aria-hidden="true"
-                    className="label text-fg-faint transition-all group-hover:translate-x-1 group-hover:text-phos"
+                    className="label text-ink-faint transition-all group-hover:translate-x-1 group-hover:text-clay-600"
                   >
                     →
                   </span>

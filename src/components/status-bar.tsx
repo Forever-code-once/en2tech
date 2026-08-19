@@ -1,38 +1,37 @@
 import { site } from "@/lib/site";
 
 /**
- * Thin fixed strip above the header — the system's "always on" readout.
- * Carries availability, location and a build year, the way a terminal
- * multiplexer keeps a status line pinned to the top of the screen.
+ * Docket strip above the header — availability, location, and the year the
+ * practice opened. Reads as the header block of a service record.
  */
 export function StatusBar() {
   return (
-    <div className="fixed inset-x-0 top-0 z-60 border-b border-grid bg-void">
-      <div className="mx-auto flex h-7 w-full max-w-[110rem] items-center justify-between gap-4 px-4 sm:px-6">
-        <p className="label flex items-center gap-2 text-fg-faint">
+    <div className="fixed inset-x-0 top-0 z-60 bg-forest-800 text-paper-200">
+      <div className="mx-auto flex h-7 w-full max-w-[100rem] items-center justify-between gap-4 px-4 sm:px-6">
+        <p className="label flex items-center gap-2.5">
           <span
             aria-hidden="true"
-            className={`inline-block h-1.5 w-1.5 ${
-              site.atCapacity ? "bg-warn" : "bg-phos"
+            className={`inline-block h-2 w-2 ${
+              site.atCapacity ? "bg-clay-500" : "bg-paper-200"
             }`}
           />
-          <span className={site.atCapacity ? "text-warn" : "text-phos"}>
-            {site.atCapacity ? "Booked full" : "Taking new work"}
+          <span>{site.atCapacity ? "Booked full" : "Taking new work"}</span>
+          <span aria-hidden="true" className="text-forest-500">
+            &bull;
           </span>
-          <span aria-hidden="true" className="text-grid-hi">
-            {"//"}
+          <span className="hidden text-paper-400 sm:inline">
+            Accepting enquiries
           </span>
-          <span className="hidden sm:inline">Accepting enquiries</span>
         </p>
 
-        <p className="label flex items-center gap-2 text-fg-faint">
+        <p className="label flex items-center gap-2.5 text-paper-400">
           <span className="hidden sm:inline">
             {site.locality}, {site.region}
           </span>
-          <span aria-hidden="true" className="hidden text-grid-hi sm:inline">
-            {"//"}
+          <span aria-hidden="true" className="hidden text-forest-500 sm:inline">
+            &bull;
           </span>
-          <span>EST. {site.founded}</span>
+          <span>Est. {site.founded}</span>
         </p>
       </div>
     </div>

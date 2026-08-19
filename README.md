@@ -5,9 +5,10 @@ technology consulting in Murfreesboro, Tennessee.
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · MDX
 
-**Design language: terminal.** Monospace-forward, grid-ruled, zero border-radius,
-a single phosphor accent on deep charcoal. The rules are documented in
-`src/app/globals.css` — read them before adding a component.
+**Design language: field manual.** Bone paper, deep forest, oxblood. The
+reference is equipment documentation and service records rather than a
+brochure. The rules are documented in `src/app/globals.css` — read them before
+adding a component.
 
 ---
 
@@ -101,16 +102,21 @@ the sitemap, and search indexing.
 ## Notes on the build
 
 **The design system has rules.** Four, enforced by convention in
-`src/app/globals.css`: no rounded corners anywhere (every radius token is
-`0px`); one accent colour, with emphasis coming from rules and space; hover
-inverts foreground/background rather than tinting; every panel is bounded by a
-visible 1px rule. The `.label` utility — uppercase mono, `0.18em` tracking — is
-the workhorse and should be reached for before any custom type styling.
+`src/app/globals.css`: borders are 2px and forest — they are structure, not
+trim; a `.plate` always carries a `.plate-head` bar naming what it holds; one
+accent (oxblood) for emphasis, never decoration; and no rounded corners
+anywhere, since every radius token is `0px`. The `.label` utility — uppercase,
+`0.13em` tracking — is the workhorse for every plate header, data caption and
+eyebrow.
 
-**Two typefaces, one family.** IBM Plex Mono carries all display, UI and label
-text. IBM Plex Sans handles long-form reading only, via the `.prose-body`
-class — mono at paragraph length is punishing. They share a skeleton, so the
-pairing reads as one voice.
+**Two typefaces.** Zilla Slab carries every heading — a workhorse slab with
+enough weight to anchor a plate header, and none of the boutique-editorial
+softness a high-contrast serif would bring. Public Sans handles all running
+text and spec labels. Use `.measure` to hold body copy near 66 characters.
+
+**Numbering means something.** The process steps and the era log are numbered
+because they genuinely run in order. Nothing else is, deliberately — numbering
+here is information, not ornament.
 
 **Fonts are self-hosted.** `next/font` fetches both at build time. There is no
 request to Google at runtime — the page makes zero external requests.
@@ -124,11 +130,10 @@ and free for one instance. If the site ever runs behind a load balancer, swap
 the Map in `src/lib/rate-limit.ts` for Redis — the `rateLimit()` signature is
 designed not to change.
 
-**Motion is opt-out aware.** `Reveal` wipes content in left-to-right with
-`clip-path`, like text printing to a terminal. It renders content visible on the
-server and never applies the hidden state when `prefers-reduced-motion` is set,
-so content cannot be stranded at `opacity: 0`. The blinking `.caret` stops under
-the same query.
+**Motion is opt-out aware.** `Reveal` does a short rise and fade — paper
+settling. It renders content visible on the server and never applies the hidden
+state when `prefers-reduced-motion` is set, so content cannot be stranded at
+`opacity: 0`.
 
 **Security headers ship with the app**, not the proxy — see the CSP in
 `next.config.ts`. Caddy only strips its own `Server` banner.

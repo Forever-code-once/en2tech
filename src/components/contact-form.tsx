@@ -117,8 +117,8 @@ export function ContactForm() {
     touched[name] && errors[name as keyof ContactFieldErrors];
 
   const inputClass = (name: string) =>
-    `w-full border bg-void px-4 py-3 font-mono text-sm text-fg placeholder:text-fg-faint transition-colors focus:outline-none focus-visible:border-phos ${
-      showError(name) ? "border-alert" : "border-grid hover:border-grid-hi"
+    `w-full border-2 bg-paper-50 px-4 py-3 text-ink placeholder:text-ink-faint transition-colors focus:outline-none focus-visible:border-clay-600 ${
+      showError(name) ? "border-clay-600" : "border-paper-400 hover:border-forest-800"
     }`;
 
   if (status === "success") {
@@ -127,28 +127,27 @@ export function ContactForm() {
         ref={statusRef}
         tabIndex={-1}
         role="status"
-        className="brackets border border-phos-dim bg-shell focus:outline-none"
+        className="plate focus:outline-none"
       >
-        <p className="label border-b border-phos-dim px-6 py-3.5 text-phos">
-          <span aria-hidden="true">$ </span>send --status=ok
-        </p>
+        <p className="plate-head label">Message sent</p>
         <div className="px-6 py-10 text-center">
-          <p aria-hidden="true" className="font-mono text-3xl text-phos">
-            [✓]
+          <p
+            aria-hidden="true"
+            className="mx-auto grid h-12 w-12 place-items-center bg-forest-800 font-slab text-xl text-paper-200"
+          >
+            ✓
           </p>
-          <h3 className="mt-5 font-mono text-lg uppercase text-fg">
-            Message sent
+          <h3 className="mt-5 font-slab text-2xl font-bold text-forest-800">
+            Thanks — it&apos;s on its way
           </h3>
-          <p className="prose-body mx-auto mt-3 max-w-sm text-fg-dim">
-            {statusMessage}
-          </p>
+          <p className="mx-auto mt-3 max-w-sm text-ink-soft">{statusMessage}</p>
           <button
             type="button"
             onClick={() => {
               setStatus("idle");
               setStatusMessage("");
             }}
-            className="label mt-8 border border-grid px-5 py-3 text-fg-dim transition-colors hover:border-phos hover:text-phos"
+            className="label mt-8 border-2 border-forest-800 px-5 py-3 text-forest-800 transition-colors hover:bg-forest-800 hover:text-paper-200"
           >
             Send another →
           </button>
@@ -169,18 +168,17 @@ export function ContactForm() {
         <div key={field.name}>
           <label
             htmlFor={fieldId(field.name)}
-            className="label mb-2.5 flex items-baseline gap-2 text-fg-dim"
+            className="label mb-2.5 flex items-baseline gap-2 text-forest-800"
           >
-            <span aria-hidden="true" className="text-phos">
-              ›
-            </span>
             {field.label}
             {field.required ? (
-              <span aria-hidden="true" className="text-alert">
+              <span aria-hidden="true" className="text-clay-600">
                 *
               </span>
             ) : (
-              <span className="text-fg-faint">(optional)</span>
+              <span className="font-normal tracking-normal text-ink-faint">
+                (optional)
+              </span>
             )}
           </label>
           <input
@@ -204,8 +202,8 @@ export function ContactForm() {
             className={inputClass(field.name)}
           />
           {showError(field.name) ? (
-            <p id={errorId(field.name)} className="label mt-2.5 text-alert">
-              ! {errors[field.name as keyof ContactFieldErrors]}
+            <p id={errorId(field.name)} className="label mt-2.5 text-clay-600">
+              {errors[field.name as keyof ContactFieldErrors]}
             </p>
           ) : null}
         </div>
@@ -214,13 +212,10 @@ export function ContactForm() {
       <div>
         <label
           htmlFor={fieldId("message")}
-          className="label mb-2.5 flex items-baseline gap-2 text-fg-dim"
+          className="label mb-2.5 flex items-baseline gap-2 text-forest-800"
         >
-          <span aria-hidden="true" className="text-phos">
-            ›
-          </span>
           Message
-          <span aria-hidden="true" className="text-alert">
+          <span aria-hidden="true" className="text-clay-600">
             *
           </span>
         </label>
@@ -243,8 +238,8 @@ export function ContactForm() {
           className={`${inputClass("message")} resize-y`}
         />
         {showError("message") ? (
-          <p id={errorId("message")} className="label mt-2.5 text-alert">
-            ! {errors.message}
+          <p id={errorId("message")} className="label mt-2.5 text-clay-600">
+            {errors.message}
           </p>
         ) : null}
       </div>
@@ -272,8 +267,7 @@ export function ContactForm() {
         className="focus:outline-none"
       >
         {statusMessage && status === "error" ? (
-          <p className="label border border-alert px-4 py-3.5 leading-relaxed text-alert">
-            <span aria-hidden="true">! </span>
+          <p className="label border-2 border-clay-600 bg-clay-100 px-4 py-3.5 leading-relaxed text-clay-700">
             {statusMessage}
           </p>
         ) : null}
@@ -288,11 +282,11 @@ export function ContactForm() {
         {status === "submitting" ? "Sending…" : "Send message →"}
       </Button>
 
-      <p className="label leading-relaxed text-fg-faint">
+      <p className="text-sm leading-relaxed text-ink-faint">
         We&apos;ll only use your details to reply. No lists, no sharing — see the{" "}
         <a
           href="/privacy"
-          className="text-fg-dim underline underline-offset-2 hover:text-phos"
+          className="text-ink-soft underline decoration-paper-400 underline-offset-2 hover:text-clay-600"
         >
           privacy note
         </a>

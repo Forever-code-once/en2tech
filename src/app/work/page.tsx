@@ -25,22 +25,22 @@ export default function WorkPage() {
   return (
     <>
       <PageHero
-        eyebrow="work --list --anonymized"
-        title="Systems people use every day"
+        eyebrow="Selected work"
+        title="Systems people use every day."
         lede="We build software that becomes part of an operation's daily routine. Client names are withheld — these are systems still running production work."
-        breadcrumb={[{ name: "work", href: "/work" }]}
+        breadcrumb={[{ name: "Work", href: "/work" }]}
       />
 
       <Section size="wide">
         {publishedCaseStudies.length > 0 ? (
           <>
             <Reveal>
-              <p className="label mb-8 text-fg-faint">
+              <p className="label mb-8 text-ink-faint">
                 {publishedCaseStudies.length} record
                 {publishedCaseStudies.length === 1 ? "" : "s"} found
               </p>
             </Reveal>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2">
               {publishedCaseStudies.map((study, i) => (
                 <Reveal key={study.slug} delay={i * 90}>
                   <CaseStudyCard study={study} />
@@ -50,12 +50,12 @@ export default function WorkPage() {
           </>
         ) : (
           <Reveal>
-            <div className="border border-grid bg-shell px-8 py-20 text-center">
-              <p className="label text-fg-faint">0 records found</p>
-              <h2 className="mt-5 font-mono text-xl uppercase text-fg">
+            <div className="plate px-8 py-20 text-center">
+              <p className="label text-ink-faint">0 records found</p>
+              <h2 className="mt-5 font-slab text-2xl font-bold text-forest-800">
                 Case studies coming soon
               </h2>
-              <p className="prose-body mx-auto mt-3 max-w-md text-fg-dim">
+              <p className="mx-auto mt-3 max-w-md text-ink-soft">
                 We are writing up current engagements. In the meantime, ask us
                 directly about work relevant to your industry.
               </p>

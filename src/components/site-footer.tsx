@@ -1,31 +1,43 @@
 import Link from "next/link";
-import { Logo } from "./logo";
 import { footerNav, site } from "@/lib/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative z-1 border-t border-grid bg-void">
-      <div className="mx-auto w-full max-w-[110rem] px-4 sm:px-6">
-        {/* Ruled cells, divided by the grid colour — the columns ARE the
-            design, so the dividers stay on at rest. */}
-        <div className="grid border-x border-grid md:grid-cols-4">
-          <div className="border-b border-grid p-8 md:border-b-0 md:border-r">
+    <footer className="relative z-1 border-t-2 border-forest-800 bg-forest-800 text-paper-200">
+      <div className="mx-auto w-full max-w-[100rem] px-4 sm:px-6">
+        <div className="grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)] md:gap-8">
+          <div className="max-w-xs">
             <Link href="/" aria-label={`${site.name} — home`}>
-              <Logo />
+              <span className="inline-flex items-center gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="grid h-8 w-8 shrink-0 place-items-center bg-paper-200 font-slab text-base leading-none font-bold text-forest-800"
+                >
+                  E
+                </span>
+                <span className="font-slab text-xl leading-none font-bold tracking-tight text-paper-100">
+                  EN<span className="text-clay-500">2</span>
+                  <span className="ml-1.5 text-base font-normal text-paper-400">
+                    Tech
+                  </span>
+                </span>
+              </span>
             </Link>
-            <p className="mt-5 max-w-56 text-sm leading-relaxed text-fg-dim">
+
+            <p className="mt-5 text-sm leading-relaxed text-paper-400">
               {site.tagline}
             </p>
-            <address className="mt-6 space-y-1 text-sm not-italic">
-              <p className="text-fg-faint">
+
+            <address className="mt-5 space-y-1 text-sm not-italic">
+              <p className="text-paper-400">
                 {site.locality}, {site.regionName}
               </p>
               <p>
                 <a
                   href={`mailto:${site.email}`}
-                  className="text-phos transition-colors hover:text-fg"
+                  className="text-paper-100 underline decoration-clay-500 decoration-2 underline-offset-4 transition-colors hover:text-clay-500"
                 >
                   {site.email}
                 </a>
@@ -33,33 +45,18 @@ export function SiteFooter() {
             </address>
           </div>
 
-          {footerNav.map((group, i) => (
-            <nav
-              key={group.title}
-              aria-label={group.title}
-              className={`border-b border-grid p-8 md:border-b-0 ${
-                i < footerNav.length - 1 ? "md:border-r" : ""
-              }`}
-            >
-              <h2 className="label text-fg-faint">
-                <span aria-hidden="true" className="text-grid-hi">
-                  ##{" "}
-                </span>
+          {footerNav.map((group) => (
+            <nav key={group.title} aria-label={group.title}>
+              <h2 className="label border-b border-forest-600 pb-3 text-paper-400">
                 {group.title}
               </h2>
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mt-4 space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group inline-flex items-baseline gap-2 text-sm text-fg-dim transition-colors hover:text-phos"
+                      className="text-sm text-paper-200 transition-colors hover:text-clay-500"
                     >
-                      <span
-                        aria-hidden="true"
-                        className="text-grid-hi transition-colors group-hover:text-phos"
-                      >
-                        ›
-                      </span>
                       {link.label}
                     </Link>
                   </li>
@@ -69,13 +66,11 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="label flex flex-col justify-between gap-2 border-x border-t border-grid px-8 py-5 text-fg-faint sm:flex-row">
+        <div className="label flex flex-col justify-between gap-2 border-t border-forest-600 py-6 text-paper-400 sm:flex-row">
           <p>
-            © {year} {site.legalName}
+            © {year} {site.legalName} · {site.locality}, {site.region}
           </p>
-          <p aria-hidden="true" className="text-grid-hi">
-            {"─".repeat(3)} EOF {"─".repeat(3)}
-          </p>
+          <p>{site.tagline}</p>
         </div>
       </div>
     </footer>

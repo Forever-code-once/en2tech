@@ -37,51 +37,39 @@ export function SiteHeader() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="fixed inset-x-0 top-7 z-50 border-b border-grid bg-void/92 backdrop-blur-sm">
-      <div className="mx-auto flex h-12 w-full max-w-[110rem] items-stretch justify-between px-4 sm:h-16 sm:px-6">
-        <Link
-          href="/"
-          aria-label={`${site.name} — home`}
-          className="flex shrink-0 items-center pr-6"
-        >
+    <header className="fixed inset-x-0 top-7 z-50 border-b-2 border-forest-800 bg-paper-200/97 backdrop-blur-sm">
+      <div className="mx-auto flex h-12 w-full max-w-[100rem] items-center justify-between gap-6 px-4 sm:h-16 sm:px-6">
+        <Link href="/" aria-label={`${site.name} — home`} className="shrink-0">
           <Logo />
         </Link>
 
-        {/* Desktop nav. Each item is a ruled cell rather than a pill — the
-            divider lines are the design, so they stay visible at rest. */}
         <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex h-full items-stretch">
-            {primaryNav.map((link, i) => (
-              <li key={link.href} className="flex">
+          <ul className="flex items-center gap-1">
+            {primaryNav.map((link) => (
+              <li key={link.href}>
                 <Link
                   href={link.href}
                   aria-current={isActive(link.href) ? "page" : undefined}
-                  className={`label group relative flex items-center border-l border-grid px-6 transition-colors duration-150 ${
+                  className={`label relative block px-4 py-2.5 transition-colors duration-150 ${
                     isActive(link.href)
-                      ? "text-phos"
-                      : "text-fg-dim hover:bg-panel hover:text-fg"
+                      ? "text-clay-600"
+                      : "text-ink-soft hover:text-forest-800"
                   }`}
                 >
-                  <span
-                    aria-hidden="true"
-                    className="mr-2 text-fg-faint transition-colors group-hover:text-phos"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   {link.label}
                   {isActive(link.href) ? (
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-0 bottom-0 h-px bg-phos"
+                      className="absolute inset-x-3 -bottom-0.5 h-0.5 bg-clay-600"
                     />
                   ) : null}
                 </Link>
               </li>
             ))}
-            <li className="flex">
+            <li className="ml-3">
               <Link
                 href="/contact"
-                className="label flex items-center border-l border-grid bg-phos px-6 text-void transition-colors duration-150 hover:bg-fg"
+                className="label block border-2 border-forest-800 bg-forest-800 px-5 py-2.5 text-paper-200 transition-colors duration-150 hover:bg-transparent hover:text-forest-800"
               >
                 Get in touch
               </Link>
@@ -95,10 +83,24 @@ export function SiteHeader() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-nav"
-          className="label flex items-center gap-2 border-l border-grid pl-5 text-fg-dim md:hidden"
+          className="label flex items-center gap-2.5 border-2 border-forest-800 px-3.5 py-2.5 text-forest-800 md:hidden"
         >
-          <span aria-hidden="true" className="text-phos">
-            {open ? "[×]" : "[≡]"}
+          <span aria-hidden="true" className="flex h-3 w-4 flex-col justify-between">
+            <span
+              className={`h-0.5 w-full bg-current transition-transform duration-200 ${
+                open ? "translate-y-[5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-0.5 w-full bg-current transition-opacity duration-150 ${
+                open ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`h-0.5 w-full bg-current transition-transform duration-200 ${
+                open ? "-translate-y-[5px] -rotate-45" : ""
+              }`}
+            />
           </span>
           {open ? "Close" : "Menu"}
         </button>
@@ -108,26 +110,23 @@ export function SiteHeader() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="border-t border-grid bg-void md:hidden"
+        className="border-t-2 border-forest-800 bg-paper-100 md:hidden"
       >
         {/* Closing on click keeps the panel from lingering over the new page
             without a setState-in-effect on every navigation. */}
         <nav aria-label="Mobile" onClick={() => setOpen(false)}>
           <ul className="flex flex-col">
-            {primaryNav.map((link, i) => (
+            {primaryNav.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   aria-current={isActive(link.href) ? "page" : undefined}
-                  className={`flex items-baseline gap-3 border-b border-grid px-4 py-4 font-mono text-sm transition-colors ${
+                  className={`block border-b border-paper-300 px-4 py-4 font-slab text-lg font-600 transition-colors ${
                     isActive(link.href)
-                      ? "bg-panel text-phos"
-                      : "text-fg hover:bg-panel"
+                      ? "bg-paper-50 text-clay-600"
+                      : "text-forest-800 hover:bg-paper-50"
                   }`}
                 >
-                  <span aria-hidden="true" className="label text-fg-faint">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   {link.label}
                 </Link>
               </li>
@@ -135,7 +134,7 @@ export function SiteHeader() {
             <li>
               <Link
                 href="/contact"
-                className="label block bg-phos px-4 py-4 text-void"
+                className="label block bg-forest-800 px-4 py-4 text-paper-200"
               >
                 Get in touch →
               </Link>

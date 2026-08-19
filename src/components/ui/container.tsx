@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 
 /**
- * Widths align with the header/footer rails (max-w-[110rem] at px-4/px-6) so
- * the vertical grid rules read as one continuous frame down the page.
+ * Widths align with the header/footer rails so page content sits on the same
+ * measure as the chrome above and below it.
  */
 const widths = {
   narrow: "max-w-3xl",
   default: "max-w-5xl",
-  wide: "max-w-[110rem]",
+  wide: "max-w-[100rem]",
 } as const;
 
 export function Container({

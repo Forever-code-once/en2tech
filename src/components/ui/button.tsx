@@ -2,22 +2,27 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
 /**
- * Square, ruled, uppercase. Hover inverts foreground and background rather
- * than tinting — the whole system signals state by swapping, not shading.
+ * Square, 2px-bordered, uppercase. Solid forest is the primary action; hover
+ * empties the fill so the border carries it — the same swap the plates use.
  */
 const base =
-  "label inline-flex items-center justify-center gap-2.5 border transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-40";
+  "label inline-flex items-center justify-center gap-2.5 border-2 transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-45";
 
 const variants = {
-  primary: "border-phos bg-phos text-void hover:bg-transparent hover:text-phos",
-  secondary: "border-grid-hi bg-transparent text-fg hover:border-phos hover:bg-phos hover:text-void",
-  ghost: "border-grid bg-transparent text-fg-dim hover:border-phos hover:text-phos",
+  primary:
+    "border-forest-800 bg-forest-800 text-paper-200 hover:bg-transparent hover:text-forest-800",
+  secondary:
+    "border-forest-800 bg-transparent text-forest-800 hover:bg-forest-800 hover:text-paper-200",
+  accent:
+    "border-clay-600 bg-clay-600 text-paper-100 hover:bg-transparent hover:text-clay-600",
+  ghost:
+    "border-paper-400 bg-transparent text-ink-soft hover:border-forest-800 hover:text-forest-800",
 } as const;
 
 const sizes = {
   sm: "px-4 py-2.5",
   md: "px-6 py-3.5",
-  lg: "px-8 py-4.5",
+  lg: "px-8 py-4",
 } as const;
 
 type Shared = {

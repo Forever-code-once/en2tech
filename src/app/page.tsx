@@ -31,41 +31,37 @@ export default function HomePage() {
   return (
     <>
       {/* ══════════════════════ HERO ══════════════════════ */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="grid-field pointer-events-none absolute inset-0"
-        />
-        <Container size="wide" className="relative">
-          <div className="border-x border-grid">
-            <div className="px-6 py-20 sm:py-28 lg:py-36">
+      <section className="border-b-2 border-forest-800 bg-paper-100">
+        <Container size="wide">
+          <div className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.35fr_1fr] lg:gap-16 lg:py-24">
+            <div>
               <Reveal>
-                <p className="label text-fg-dim">
-                  <span aria-hidden="true" className="text-phos">
-                    ${" "}
+                <div className="flex items-center gap-3.5">
+                  <span aria-hidden="true" className="h-0.5 w-8 bg-clay-600" />
+                  <span className="label text-clay-600">
+                    Murfreesboro, Tennessee
                   </span>
-                  en2 --describe
-                </p>
+                </div>
               </Reveal>
 
-              <Reveal delay={90}>
-                <h1 className="mt-8 max-w-[22ch] text-[clamp(2.25rem,7.5vw,6rem)] uppercase">
+              <Reveal delay={80}>
+                <h1 className="mt-7 max-w-[16ch] text-[clamp(2.5rem,6.5vw,5rem)] leading-[0.98]">
                   We build the tech that{" "}
-                  <span className="phos-glow">small business</span> runs on
-                  <span className="caret" aria-hidden="true" />
+                  <span className="text-clay-600">small business</span>{" "}
+                  runs&nbsp;on.
                 </h1>
               </Reveal>
 
-              <Reveal delay={170}>
-                <p className="prose-body mt-9 max-w-2xl text-fg-dim">
+              <Reveal delay={150}>
+                <p className="measure mt-7 text-lg leading-relaxed text-ink-soft">
                   Bridging the analog and the digital — custom software, systems
                   integration, and strategic technology consulting for growing
                   companies in rural Middle Tennessee.
                 </p>
               </Reveal>
 
-              <Reveal delay={240}>
-                <div className="mt-11 flex flex-col gap-3 sm:flex-row">
+              <Reveal delay={220}>
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                   <ButtonLink href="/contact" size="lg">
                     Start a conversation
                   </ButtonLink>
@@ -76,50 +72,55 @@ export default function HomePage() {
               </Reveal>
             </div>
 
-            <div className="border-t border-grid">
+            <Reveal delay={140} className="lg:self-end">
               <MetricsBand metrics={heroMetrics} />
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>
 
       {/* ══════════════════════ SERVICES ══════════════════════ */}
-      <Section id="services" size="wide" className="border-t border-grid">
-        <SectionRule index={1} name="What we build" />
+      <Section id="services" size="wide">
+        <SectionRule name="What we build" />
 
-        <div className="mt-12">
+        <div className="mt-7">
           <SectionHeading
-            title="Software that fits your business"
+            title="Software that fits your business."
             lede="No off-the-shelf compromises. We design, build, and maintain the systems your team actually uses — from dispatch floors to front offices."
           />
         </div>
 
-        <div className="mt-14 border-t border-grid">
+        <div className="mt-12 border-t-2 border-forest-800">
           {services.map((service, i) => (
             <Reveal key={service.slug} delay={i * 80}>
-              <ServiceRow service={service} index={i} />
+              <ServiceRow service={service} />
             </Reveal>
           ))}
         </div>
       </Section>
 
       {/* ══════════════════ DIFFERENTIATOR ══════════════════ */}
-      <Section size="wide" className="border-t border-grid bg-shell">
-        <SectionRule index={2} name="Why we're different" />
+      <Section
+        size="wide"
+        className="border-y-2 border-forest-800 bg-paper-100"
+      >
+        <SectionRule name="Why we're different" />
 
-        <div className="mt-12 grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-16">
+        <div className="mt-7 grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div>
-            <SectionHeading title="Bridging the analog and the digital" />
+            <SectionHeading title="Bridging the analog and the digital." />
 
             <Reveal delay={140}>
-              <div className="prose-body mt-8 space-y-5 text-fg-dim">
+              <div className="measure mt-7 space-y-4 text-ink-soft">
                 <p>
                   There&apos;s a gap in small-town America between the businesses
                   that grew up on paper, phone calls, and handshake deals — and
                   the digital tools that could transform them. Most technology
                   consultants have only ever lived on one side of that divide.
                 </p>
-                <p className="text-fg">We&apos;ve lived through every era of it.</p>
+                <p className="font-slab text-xl leading-snug font-600 text-forest-800">
+                  We&apos;ve lived through every era of it.
+                </p>
                 <p>
                   From dialing into text-based bulletin board systems over a
                   2400-baud modem to hand-coded HTML, to enterprise systems
@@ -133,12 +134,12 @@ export default function HomePage() {
             <Reveal delay={200}>
               <Link
                 href="/about"
-                className="label group mt-9 inline-flex items-center gap-2 text-phos"
+                className="label group mt-8 inline-flex items-center gap-2 text-clay-600 underline decoration-2 underline-offset-4"
               >
-                Read the full log
+                Read the full history
                 <span
                   aria-hidden="true"
-                  className="transition-transform duration-150 group-hover:translate-x-1"
+                  className="no-underline transition-transform duration-150 group-hover:translate-x-1"
                 >
                   →
                 </span>
@@ -146,52 +147,59 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {/* Era log — rendered as changelog entries rather than a timeline. */}
-          <ol className="border border-grid">
-            {timeline.map((era, i) => (
-              <Reveal
-                key={era.title}
-                as="li"
-                delay={i * 80}
-                className={i < timeline.length - 1 ? "border-b border-grid" : ""}
-              >
-                <div className="p-6 sm:p-7">
-                  <div className="label flex items-center gap-3 text-fg-faint">
-                    <span className="text-phos">[{era.period}]</span>
-                    <span aria-hidden="true" className="h-px flex-1 bg-grid" />
+          {/* Era log — a dated register. The periods carry real chronological
+              information, so the ordering is content rather than decoration. */}
+          <div className="plate">
+            <p className="plate-head label">Four decades on record</p>
+            <ol>
+              {timeline.map((era, i) => (
+                <Reveal
+                  key={era.title}
+                  as="li"
+                  delay={i * 80}
+                  className={
+                    i < timeline.length - 1
+                      ? "border-b-2 border-forest-800"
+                      : ""
+                  }
+                >
+                  <div className="grid gap-1.5 p-5 sm:grid-cols-[7.5rem_1fr] sm:gap-5 sm:p-6">
+                    <p className="label pt-1 text-clay-600 tabular-nums">
+                      {era.period}
+                    </p>
+                    <div>
+                      <h3 className="font-slab text-lg leading-snug font-bold text-forest-800">
+                        {era.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm text-ink-soft">{era.body}</p>
+                    </div>
                   </div>
-                  <h3 className="mt-4 font-mono text-base uppercase text-fg">
-                    {era.title}
-                  </h3>
-                  <p className="prose-body mt-2 text-sm text-fg-dim">
-                    {era.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
         </div>
       </Section>
 
       {/* ══════════════════ SELECTED WORK ══════════════════ */}
       {publishedCaseStudies.length > 0 ? (
-        <Section size="wide" className="border-t border-grid">
-          <SectionRule index={3} name="Selected work" />
+        <Section size="wide">
+          <SectionRule name="Selected work" />
 
-          <div className="mt-12 flex flex-wrap items-end justify-between gap-6">
+          <div className="mt-7 flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
-              title="Systems in daily use"
+              title="Systems in daily use."
               lede="Real operations, running on software we built and still maintain."
             />
             <Reveal delay={120}>
               <Link
                 href="/work"
-                className="label group inline-flex items-center gap-2 text-phos"
+                className="label group inline-flex items-center gap-2 text-clay-600 underline decoration-2 underline-offset-4"
               >
                 All records
                 <span
                   aria-hidden="true"
-                  className="transition-transform duration-150 group-hover:translate-x-1"
+                  className="no-underline transition-transform duration-150 group-hover:translate-x-1"
                 >
                   →
                 </span>
@@ -199,7 +207,7 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2">
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
             {publishedCaseStudies.slice(0, 2).map((study, i) => (
               <Reveal key={study.slug} delay={i * 90}>
                 <CaseStudyCard study={study} />
@@ -210,39 +218,33 @@ export default function HomePage() {
       ) : null}
 
       {/* ══════════════════════ PROCESS ══════════════════════ */}
-      <Section size="wide" className="border-t border-grid">
-        <SectionRule index={4} name="How we work" />
+      <Section size="wide" className="border-t-2 border-forest-800 bg-paper-100">
+        <SectionRule name="How we work" />
 
-        <div className="mt-12">
+        <div className="mt-7">
           <SectionHeading
-            title="Long-term partners, not vendors"
+            title="Long-term partners, not vendors."
             lede="We embed with your team. We learn your business. Then we build the tools that make your best people even better."
           />
         </div>
 
-        <div className="mt-14">
+        <div className="mt-12">
           <ProcessSteps />
         </div>
 
-        {/* Quote rendered as terminal output. */}
         <Reveal delay={120}>
-          <figure className="mt-14 border border-grid bg-shell">
-            <div className="label border-b border-grid px-6 py-3 text-fg-faint">
-              <span aria-hidden="true" className="text-phos">
-                ${" "}
-              </span>
-              cat founder.txt
-            </div>
-            <blockquote className="px-6 py-9 sm:px-9">
-              <p className="prose-body max-w-3xl text-lg leading-relaxed text-fg sm:text-xl">
+          <figure className="plate mt-10">
+            <p className="plate-head label">From the founder</p>
+            <blockquote className="ledger px-6 py-9 sm:px-10">
+              <p className="measure font-slab text-xl leading-relaxed text-forest-800 sm:text-2xl">
                 &ldquo;I&apos;ve watched technology go from something you dialed
                 into, to something that runs every business on earth. The
                 companies that win in small-town America are the ones with
                 someone who&apos;s been on both sides of that line.&rdquo;
               </p>
             </blockquote>
-            <figcaption className="label border-t border-grid px-6 py-3.5 text-fg-faint sm:px-9">
-              — {site.founder}, {site.name}
+            <figcaption className="label border-t-2 border-forest-800 px-6 py-4 text-ink-faint sm:px-10">
+              {site.founder} · Founder, {site.name}
             </figcaption>
           </figure>
         </Reveal>

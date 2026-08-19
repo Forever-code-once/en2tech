@@ -15,10 +15,13 @@ const steps = [
   },
 ];
 
-/** Three ruled cells, divided rather than spaced — one continuous panel. */
+/**
+ * Numbered because the steps genuinely run in order — each depends on the one
+ * before it. The numbering is information, not ornament.
+ */
 export function ProcessSteps() {
   return (
-    <ol className="grid border border-grid md:grid-cols-3">
+    <ol className="plate grid md:grid-cols-3">
       {steps.map((step, i) => (
         <Reveal
           key={step.title}
@@ -26,18 +29,18 @@ export function ProcessSteps() {
           delay={i * 90}
           className={
             i < steps.length - 1
-              ? "border-b border-grid md:border-b-0 md:border-r"
+              ? "border-b-2 border-forest-800 md:border-b-0 md:border-r-2"
               : ""
           }
         >
           <div className="h-full p-7 sm:p-8">
-            <p className="label text-phos">
-              STEP {String(i + 1).padStart(2, "0")}
-            </p>
-            <h3 className="mt-5 font-mono text-lg uppercase leading-tight text-fg">
+            <span className="label inline-block bg-clay-600 px-2.5 py-1.5 text-paper-100 tabular-nums">
+              Step {i + 1} of {steps.length}
+            </span>
+            <h3 className="mt-5 font-slab text-xl leading-tight font-bold text-forest-800">
               {step.title}
             </h3>
-            <p className="prose-body mt-3 text-fg-dim">{step.body}</p>
+            <p className="mt-3 text-ink-soft">{step.body}</p>
           </div>
         </Reveal>
       ))}

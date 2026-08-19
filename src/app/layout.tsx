@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Public_Sans, Zilla_Slab } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StatusBar } from "@/components/status-bar";
@@ -9,25 +9,26 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 /**
- * IBM Plex Mono carries the entire display and UI voice; Plex Sans handles
- * long-form reading only. They share a skeleton, so the pairing reads as one
- * family rather than two typefaces bolted together.
+ * Zilla Slab carries every heading — a workhorse slab with enough weight to
+ * anchor a plate header, and none of the boutique-editorial softness a
+ * high-contrast serif would bring. Public Sans handles all running text and
+ * spec labels.
  *
  * Both are self-hosted by next/font at build time — no runtime request to
  * Google, and no layout shift.
  */
-const plexMono = IBM_Plex_Mono({
+const zilla = Zilla_Slab({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-zilla",
+});
+
+const publicSans = Public_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
-  variable: "--font-plex-mono",
-});
-
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-  variable: "--font-plex-sans",
+  variable: "--font-public-sans",
 });
 
 export const metadata: Metadata = {
@@ -74,19 +75,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090a",
-  colorScheme: "dark",
+  themeColor: "#14291f",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${plexMono.variable} ${plexSans.variable}`}>
-      <body className="scanlines min-h-dvh antialiased">
+    <html lang="en" className={`${zilla.variable} ${publicSans.variable}`}>
+      <body className="min-h-dvh antialiased">
         <a
           href="#main"
-          className="label sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:bg-phos focus:px-4 focus:py-3 focus:text-void"
+          className="label sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:bg-forest-800 focus:px-4 focus:py-3 focus:text-paper-100"
         >
           Skip to content
         </a>

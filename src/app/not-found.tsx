@@ -11,47 +11,43 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="grid-field pointer-events-none absolute inset-0"
-      />
-      <Container size="default" className="relative">
-        <div className="flex min-h-[62vh] flex-col justify-center py-24">
-          <p className="label text-fg-faint">
-            <span aria-hidden="true" className="text-phos">$ </span>
-            cd requested/path
-          </p>
+    <section className="bg-paper-100">
+      <Container size="default">
+        <div className="flex min-h-[62vh] flex-col justify-center py-20">
+          <p className="stamp label w-fit text-clay-600">Error 404</p>
 
-          <p className="label mt-6 text-alert">
-            ! error 404 — no such file or directory
-          </p>
-
-          <h1 className="mt-8 text-[clamp(2rem,6vw,4rem)] uppercase">
-            That page isn&apos;t here
+          <h1 className="mt-8 text-[clamp(2rem,5.5vw,3.75rem)]">
+            That page isn&apos;t here.
           </h1>
 
-          <p className="prose-body mt-6 max-w-lg text-fg-dim">
+          <p className="measure mt-6 text-lg leading-relaxed text-ink-soft">
             The link may be out of date, or the page may have moved. Everything
-            below still resolves.
+            below still works.
           </p>
 
-          <nav aria-label="Suggested pages" className="mt-10">
-            <ul className="border border-grid">
+          <nav aria-label="Suggested pages" className="mt-10 max-w-md">
+            <ul className="plate">
               {primaryNav.map((link, i) => (
                 <li
                   key={link.href}
-                  className={i < primaryNav.length - 1 ? "border-b border-grid" : ""}
+                  className={
+                    i < primaryNav.length - 1
+                      ? "border-b border-paper-300"
+                      : ""
+                  }
                 >
                   <Link
                     href={link.href}
-                    className="group flex items-baseline gap-3 px-5 py-4 font-mono text-sm transition-colors hover:bg-panel"
+                    className="group flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-paper-50"
                   >
-                    <span aria-hidden="true" className="label text-fg-faint transition-colors group-hover:text-phos">
-                      {String(i + 1).padStart(2, "0")}
+                    <span className="font-slab text-lg font-bold text-forest-800 transition-colors group-hover:text-clay-600">
+                      {link.label}
                     </span>
-                    <span className="text-fg transition-colors group-hover:text-phos">
-                      /{link.href.replace("/", "")}
+                    <span
+                      aria-hidden="true"
+                      className="label text-ink-faint transition-all group-hover:translate-x-1 group-hover:text-clay-600"
+                    >
+                      →
                     </span>
                   </Link>
                 </li>
@@ -63,7 +59,7 @@ export default function NotFound() {
             <ButtonLink href="/" size="lg">
               Back to home
             </ButtonLink>
-            <ButtonLink href="/contact" variant="ghost" size="lg">
+            <ButtonLink href="/contact" variant="secondary" size="lg">
               Get in touch
             </ButtonLink>
           </div>

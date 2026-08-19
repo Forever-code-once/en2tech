@@ -44,17 +44,17 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="whoami"
-        title="Four decades inside the machine"
+        eyebrow="About"
+        title="Four decades inside the machine."
         lede={`${site.name} is a ${site.locality}, ${site.regionName} software consultancy. We build and maintain the systems that small businesses in Middle Tennessee actually run on.`}
-        breadcrumb={[{ name: "about", href: "/about" }]}
+        breadcrumb={[{ name: "About", href: "/about" }]}
       />
 
       <Section size="wide">
-        <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <Reveal>
-            <div className="prose-body space-y-5 text-fg-dim">
-              <p className="font-mono text-lg uppercase leading-snug tracking-tight text-fg">
+            <div className="measure space-y-4 text-ink-soft">
+              <p className="font-slab text-2xl leading-snug font-600 text-forest-800">
                 There&apos;s a gap in small-town America between the businesses
                 that grew up on paper, phone calls, and handshake deals — and the
                 digital tools that could transform them.
@@ -65,7 +65,9 @@ export default function AboutPage() {
                 stood on a dispatch floor at 5 a.m., or they know the industry
                 cold and outsource anything technical.
               </p>
-              <p className="text-fg">We&apos;ve lived through every era of it.</p>
+              <p className="font-slab text-lg leading-snug font-600 text-forest-800">
+                We&apos;ve lived through every era of it.
+              </p>
               <p>
                 From dialing into text-based bulletin board systems over a
                 2400-baud modem to the first wave of AOL bringing the internet
@@ -85,33 +87,28 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <figure className="border border-grid bg-shell lg:sticky lg:top-36">
-              <div className="label border-b border-grid px-6 py-3 text-fg-faint">
-                <span aria-hidden="true" className="text-phos">
-                  ${" "}
-                </span>
-                cat founder.txt
-              </div>
-              <blockquote className="px-6 py-8">
-                <p className="prose-body text-lg leading-relaxed text-fg">
+            <figure className="plate lg:sticky lg:top-36">
+              <p className="plate-head label">From the founder</p>
+              <blockquote className="ledger px-6 py-8">
+                <p className="font-slab text-xl leading-relaxed text-forest-800">
                   &ldquo;I&apos;ve watched technology go from something you
                   dialed into, to something that runs every business on earth.
                   The companies that win in small-town America are the ones with
                   someone who&apos;s been on both sides of that line.&rdquo;
                 </p>
               </blockquote>
-              <figcaption className="flex items-center gap-4 border-t border-grid px-6 py-5">
+              <figcaption className="flex items-center gap-4 border-t-2 border-forest-800 px-6 py-5">
                 <span
                   aria-hidden="true"
-                  className="grid h-10 w-10 shrink-0 place-items-center border border-phos font-mono text-sm text-phos"
+                  className="grid h-11 w-11 shrink-0 place-items-center bg-forest-800 font-slab text-sm font-bold text-paper-200"
                 >
                   JG
                 </span>
                 <span className="min-w-0">
-                  <span className="block truncate font-mono text-sm text-fg">
+                  <span className="block truncate font-slab text-base font-bold text-forest-800">
                     {site.founder}
                   </span>
-                  <span className="label mt-1 block text-fg-faint">
+                  <span className="label mt-1 block text-ink-faint">
                     Founder, {site.name}
                   </span>
                 </span>
@@ -122,32 +119,37 @@ export default function AboutPage() {
       </Section>
 
       {/* ── Era log ── */}
-      <Section size="wide" className="border-t border-grid bg-shell">
-        <SectionRule index={1} name="The long version" />
+      <Section size="wide" className="border-y-2 border-forest-800 bg-paper-100">
+        <SectionRule name="The long version" />
 
-        <div className="mt-12">
+        <div className="mt-7">
           <SectionHeading
-            title="Every era, first-hand"
+            title="Every era, first-hand."
             lede="Not a résumé — a record of which technology shifts we were present for, and what each one taught us about building things people rely on."
           />
         </div>
 
-        <ol className="mt-14 grid border border-grid md:grid-cols-2">
+        {/* Chronological, so the dated ordering carries real information. */}
+        <ol className="plate mt-12 grid md:grid-cols-2">
           {timeline.map((era, i) => (
             <Reveal
               key={era.title}
               as="li"
               delay={i * 80}
-              className={`border-grid ${i % 2 === 0 ? "md:border-r" : ""} ${
-                i < timeline.length - 2 ? "border-b" : "max-md:border-b"
-              } ${i === timeline.length - 1 ? "max-md:border-b-0" : ""}`}
+              className={`border-forest-800 ${
+                i % 2 === 0 ? "md:border-r-2" : ""
+              } ${i < timeline.length - 2 ? "border-b-2" : "max-md:border-b-2"} ${
+                i === timeline.length - 1 ? "max-md:border-b-0" : ""
+              }`}
             >
-              <div className="h-full p-7 sm:p-9">
-                <p className="label text-phos">[{era.period}]</p>
-                <h3 className="mt-4 font-mono text-xl uppercase leading-tight text-fg">
+              <div className="h-full p-6 sm:p-8">
+                <p className="label inline-block bg-clay-600 px-2.5 py-1.5 text-paper-100 tabular-nums">
+                  {era.period}
+                </p>
+                <h3 className="mt-4 font-slab text-xl leading-tight font-bold text-forest-800">
                   {era.title}
                 </h3>
-                <p className="prose-body mt-3 text-fg-dim">{era.body}</p>
+                <p className="mt-3 text-ink-soft">{era.body}</p>
               </div>
             </Reveal>
           ))}
@@ -155,31 +157,30 @@ export default function AboutPage() {
       </Section>
 
       {/* ── Principles ── */}
-      <Section size="wide" className="border-t border-grid">
-        <SectionRule index={2} name="How we operate" />
+      <Section size="wide">
+        <SectionRule name="How we operate" />
 
-        <div className="mt-12">
-          <SectionHeading title="Four things we don't compromise on" />
+        <div className="mt-7">
+          <SectionHeading title="Four things we don't compromise on." />
         </div>
 
-        <ul className="mt-14 grid border border-grid md:grid-cols-2">
+        <ul className="plate mt-12 grid md:grid-cols-2">
           {principles.map((principle, i) => (
             <Reveal
               key={principle.title}
               as="li"
               delay={i * 80}
-              className={`border-grid ${i % 2 === 0 ? "md:border-r" : ""} ${
-                i < principles.length - 2 ? "border-b" : "max-md:border-b"
-              } ${i === principles.length - 1 ? "max-md:border-b-0" : ""}`}
+              className={`border-forest-800 ${
+                i % 2 === 0 ? "md:border-r-2" : ""
+              } ${i < principles.length - 2 ? "border-b-2" : "max-md:border-b-2"} ${
+                i === principles.length - 1 ? "max-md:border-b-0" : ""
+              }`}
             >
-              <div className="h-full p-7 sm:p-9">
-                <p className="label text-fg-faint tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-4 font-mono text-lg uppercase leading-tight text-fg">
+              <div className="h-full p-6 sm:p-8">
+                <h3 className="font-slab text-xl leading-tight font-bold text-forest-800">
                   {principle.title}
                 </h3>
-                <p className="prose-body mt-3 text-fg-dim">{principle.body}</p>
+                <p className="mt-3 text-ink-soft">{principle.body}</p>
               </div>
             </Reveal>
           ))}
