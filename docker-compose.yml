@@ -1,0 +1,53 @@
+# EN2 Tech — Lightsail stack.
+#
+# Caddy terminates TLS (certificates issued and renewed automatically from
+# Let's Encrypt) and reverse-proxies to the Next.js container. Caddy is used
+# rather than nginx + certbot because it removes the renewal cron job, which
+# is the single most common cause of a small site going dark at the 90-day mark.
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://en2.tech}
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      # Required so the rate limiter sees the real client IP from Caddy.
+      TRUST_PROXY_HEADERS: "true"
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://en2.tech}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL}
+      CONTACT_FROM_EMAIL: ${CONTACT_FROM_EMAIL}
+    networks:
+      - en2
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"   # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data      # certificates — must persist or you WILL hit rate limits
+      - caddy_config:/config
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:-en2.tech}
+      ACME_EMAIL: ${ACME_EMAIL}
+    depends_on:
+      - web
+    networks:
+      - en2
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  en2:
+    driver: bridge

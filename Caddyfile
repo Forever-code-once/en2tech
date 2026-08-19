@@ -1,0 +1,32 @@
+{
+	email {$ACME_EMAIL}
+}
+
+{$SITE_DOMAIN}, www.{$SITE_DOMAIN} {
+	# Send www to the apex so there is one canonical host.
+	@www host www.{$SITE_DOMAIN}
+	redir @www https://{$SITE_DOMAIN}{uri} permanent
+
+	encode zstd gzip
+
+	reverse_proxy web:3000 {
+		# The app's rate limiter reads these. Caddy sets them by default,
+		# but they are declared here so the dependency is visible.
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+
+	# Security headers are set by Next.js (next.config.ts). Caddy only adds
+	# the one Next cannot: removing its own version banner.
+	header {
+		-Server
+	}
+
+	log {
+		output file /data/access.log {
+			roll_size 10MB
+			roll_keep 5
+		}
+	}
+}

@@ -1,0 +1,56 @@
+---
+title: "Most small businesses don't need new software"
+description: "They need the software they already pay for to stop lying to each other. A note on why integration usually beats replacement."
+published: "2026-04-10"
+tags: ["integration", "operations"]
+draft: false
+---
+
+The pitch is always the same. One platform. Everything in one place. Migrate off
+the mess you have and onto the thing that does it all.
+
+Sometimes that is right. Usually it is not.
+
+## The actual problem is translation
+
+Walk into most small operations and you will find good software everywhere.
+Accounting is solid. The telematics platform works. The field app the crew uses
+does what it says. Nothing is broken.
+
+What is broken is the space between them. A job gets created in one system,
+re-typed into a second, and reconciled in a third — by a person, from memory,
+at the end of the week. That person is the integration layer. They are also a
+single point of failure, and they would like to take a vacation.
+
+## Replacement resets the clock on everything that works
+
+A migration does not just move data. It moves every workaround your team
+invented, every report someone depends on, and every habit that makes the
+current process survivable. You are trading a known problem for an unknown one,
+and paying for the privilege in months of reduced output.
+
+Integration is narrower. You are not asking the business to change. You are
+asking two systems to agree.
+
+## What "integrated" actually has to mean
+
+The word gets used loosely, so here is the bar we hold:
+
+- A record is entered **once**, at the point it is first known
+- Every sync is **monitored** — a failure raises an alert, not a silence
+- Failures are **retryable** without creating duplicates
+- There is a **runbook** so a broken sync is a known problem with known steps
+
+A nightly script that quietly stops working in March and gets noticed in June is
+not an integration. It is a liability with a cron entry.
+
+## When replacement really is the answer
+
+We do recommend it, in three cases:
+
+1. The vendor is gone, or the platform is genuinely end-of-life
+2. The system cannot express something the business now fundamentally does
+3. The licensing cost has outgrown what a purpose-built tool would cost to own
+
+Outside of that, we would rather make what you have work — and spend the budget
+on the part of your operation that no vendor sells.
