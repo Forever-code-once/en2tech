@@ -47,12 +47,18 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   /**
-   * Emits .next/standalone with a self-contained server.js and only the
-   * node_modules actually reached at runtime. This is what makes the
-   * Lightsail Docker image small and lets the container run without
-   * installing dependencies at boot.
+   * `standalone` emits .next/standalone with a self-contained server.js and
+   * only the node_modules actually reached at runtime — what keeps the
+   * Lightsail Docker image small and lets the container boot without an
+   * install step.
+   *
+   * It must NOT be set on Vercel. Vercel runs its own file tracing and an
+   * onBuildComplete step against the default output layout; with standalone
+   * enabled those artefacts move and the build dies opening
+   * `.next/next-server.js.nft.json`. Vercel sets VERCEL=1 during build, so
+   * the Docker path keeps standalone and Vercel gets the layout it expects.
    */
-  output: "standalone",
+  output: process.env.VERCEL ? undefined : "standalone",
 
   poweredByHeader: false,
   reactStrictMode: true,
